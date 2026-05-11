@@ -12,7 +12,7 @@ const Layout = () => {
       <aside className="sidebar">
         <div className="brand">
           <img src={logo} alt="LOGO" />
-          <span>RentFlow</span>
+          <span>CarRental</span>
         </div>
         <nav className="nav">
           <NavLink
@@ -37,11 +37,7 @@ const Layout = () => {
             <span className="nav-dot" />
             Reservations
           </NavLink>
-          <div className="nav-section">Customers</div>
-          <div className="nav-link muted">
-            <span className="nav-dot" />
-            Reports
-          </div>
+         
         </nav>
         <div className="sidebar-footer">
           <div className="nav-link muted">
@@ -67,18 +63,7 @@ const Layout = () => {
             />
           </div>
           <div className="topbar-actions">
-            <button className="icon-button" aria-label="Notifications">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M15 17H9m9-5a6 6 0 10-12 0c0 4-2 5-2 5h16s-2-1-2-5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
+            
             <div className="user-chip">
               <div className="user-text">
                 <span>Alex Morgan</span>
