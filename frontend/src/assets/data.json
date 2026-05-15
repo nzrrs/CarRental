@@ -1,0 +1,145 @@
+{
+  "cars": [
+    {
+      "id": 1,
+      "name": "Toyota Corolla 2024",
+      "vehicleType": "Sedan",
+      "year": 2024,
+      "price": 26500,
+      "pricePerDay": 45,
+      "rating": 4.7,
+      "reviews": 132,
+      "available": true,
+      "color": "White",
+      "luggage": 3,
+      "image": "https://p7.hiclipart.com/preview/264/447/654/2019-toyota-corolla-toyota-blizzard-2018-toyota-corolla-le-sedan-2017-toyota-corolla-toyota.jpg",
+
+      "specs": {
+        "fuel": "Hybrid",
+        "transmission": "Automatic CVT",
+        "engine": "1.8L 4-Cylinder",
+        "horsepower": 121,
+        "mpg": {
+          "city": 33,
+          "highway": 42,
+          "combined": 37
+        },
+        "fuelTankCapacity": 50,
+        "seats": 5,
+        "driveType": "Front-Wheel Drive",
+        "airConditioning": true
+      },
+
+      "features": {
+        "transmission": "Automatic CVT",
+        "fuel": "Hybrid",
+        "ac": true
+      },
+
+      "comfortFeatures": [
+        "Air Conditioning",
+        "Fabric Seats",
+        "Keyless Entry"
+      ],
+
+      "safetyFeatures": [
+        "Backup Camera",
+        "Lane Departure Alert",
+        "Adaptive Cruise Control"
+      ],
+
+      "technologyFeatures": [
+        "Apple CarPlay",
+        "Android Auto",
+        "Bluetooth",
+        "USB Charging"
+      ]
+    },
+
+    {
+      "id": 2,
+      "name": "BMW 3 Series 2024",
+      "vehicleType": "Luxury Sedan",
+      "year": 2024,
+      "price": 47900,
+      "pricePerDay": 85,
+      "rating": 4.9,
+      "reviews": 89,
+      "available": true,
+      "color": "Black",
+      "luggage": 4,
+      "image": "YOUR_IMAGE_HERE",
+
+      "specs": {
+        "fuel": "Gasoline",
+        "transmission": "Automatic 8-Speed",
+        "engine": "2.0L Turbocharged 4-Cylinder",
+        "horsepower": 255,
+        "mpg": {
+          "city": 24,
+          "highway": 33,
+          "combined": 28
+        },
+        "fuelTankCapacity": 59,
+        "seats": 5,
+        "driveType": "Rear-Wheel Drive",
+        "airConditioning": true
+      },
+
+      "features": {
+        "transmission": "Automatic 8-Speed",
+        "fuel": "Gasoline",
+        "ac": true
+      },
+
+      "comfortFeatures": [
+        "Leather Interior",
+        "Panoramic Sunroof",
+        "Heated Seats",
+        "Ambient Lighting",
+        "Dual-Zone Climate Control"
+      ]
+    },
+
+    {
+      "id": 3,
+      "name": "Tesla Model 3 2024",
+      "vehicleType": "Electric Sedan",
+      "year": 2024,
+      "price": 43990,
+      "pricePerDay": 65,
+      "rating": 4.8,
+      "reviews": 201,
+      "available": true,
+      "color": "Red",
+      "luggage": 2,
+      "image": "YOUR_IMAGE_HERE",
+
+      "specs": {
+        "fuel": "Electric",
+        "transmission": "Single-Speed Automatic",
+        "engine": "Dual Motor",
+        "horsepower": 358,
+        "range": 272,
+        "batteryCapacity": 82,
+        "chargingTime": "8-10 hours",
+        "seats": 5,
+        "driveType": "Rear-Wheel Drive",
+        "airConditioning": true
+      },
+
+      "features": {
+        "transmission": "Single-Speed Automatic",
+        "fuel": "Electric",
+        "ac": true
+      },
+
+      "comfortFeatures": [
+        "Air Conditioning",
+        "Glass Roof",
+        "Heated Seats",
+        "Premium Interior"
+      ]
+    }
+  ]
+}

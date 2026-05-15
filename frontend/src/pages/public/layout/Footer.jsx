@@ -1,7 +1,7 @@
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import CarRentalLogo from "../../../assets/images/car_logo.png";
-import supportIcon from "../../../assets/images/support_icon.png";
+import supportIcon from "../../../assets/images/phone_blue_icon.png";
 import Info from "./Info.jsx";
 
 const SOCIAL_LINKS = [
@@ -22,9 +22,9 @@ const QUICK_LINKS = [
 const CAR_TYPES = ["Sedan", "Cabriolet", "Pickup", "Minivan", "SUV"];
 
 const CONTACT_INFO = [
-  { title: "Address", subtitle: "Oxford Ave. Cary, NC 27511" },
-  { title: "Email", subtitle: "nwiger@yahoo.com" },
-  { title: "Phone", subtitle: "+537 547-6401" },
+  { icon: "",title: "Address", subtitle: "Oxford Ave. Cary, NC 27511" },
+  { icon: "",title: "Email", subtitle: "nwiger@yahoo.com" },
+  { icon: "",title: "Phone", subtitle: "+537 547-6401" },
 ];
 
 export default function Footer() {
@@ -32,7 +32,7 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-gray-200 bg-white">
-      <div className="mx-auto w-full max-w-7xl px-4 py-10 md:px-8 lg:px-12">
+      <div className="container py-10">
         {/* TOP INFO BAR */}
         <div className="mb-10 flex flex-col gap-6 border-b border-gray-100 pb-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center gap-2">
@@ -44,7 +44,7 @@ export default function Footer() {
             {CONTACT_INFO.map((contact) => (
               <Info
                 key={contact.title}
-                icon={supportIcon}
+                icon={contact.icon || supportIcon}
                 title={contact.title}
                 subtitle={contact.subtitle}
               />

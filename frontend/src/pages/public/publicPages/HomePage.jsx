@@ -1,7 +1,10 @@
 import React from 'react'
 
+
 export default function HomePage() {
   return (
-    <div>HomePage</div>
+    <div className="mx-auto w-full max-w-7xl px-4 md:px-8 lg:px-12">
+      
+    </div>
   )
 }
