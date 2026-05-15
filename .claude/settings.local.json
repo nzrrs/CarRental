@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e ' *)",
+      "Bash(node --input-type=module -e ' *)",
+      "Bash(sed -i '52s/status: \"blocked\"/status: \"active\"/' frontend/src/data/data.js)",
+      "Bash(sed -i '53s/status: \"blocked\"/status: \"active\"/' frontend/src/data/data.js)",
+      "Bash(sed -i '54s/status: \"blocked\"/status: \"active\"/' frontend/src/data/data.js)",
+      "Bash(sed -i '55s/status: \"blocked\"/status: \"active\"/' frontend/src/data/data.js)",
+      "Bash(sed -i '56s/status: \"blocked\"/status: \"active\"/' frontend/src/data/data.js)",
+      "Bash(sed -i 's/clientId: 1,/clientId: 4,/g' frontend/src/data/data.js)",
+      "Bash(sed -i 's/clientId: 2,/clientId: 5,/g' frontend/src/data/data.js)",
+      "Bash(sed -i 's/clientId: 3,/clientId: 6,/g' frontend/src/data/data.js)",
+      "Bash(sed -i 's/clientId: 4,/clientId: 7,/g' frontend/src/data/data.js)",
+      "Bash(sed -i 's/clientId: 5,/clientId: 8,/g' frontend/src/data/data.js)"
+    ]
+  }
+}

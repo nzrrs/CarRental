@@ -13,10 +13,9 @@ export default function Sidebar({ isOpen }) {
   const navItems = [
     { label: "Dashboard", icon: <LayoutDashboard size={18} />, to: "/admin/dashboard" },
     { label: "Agencies", icon: <Building2 size={18} />, to: "/admin/agencies" },
-    { label: "Cars Validation", icon: <Car size={18} />, to: "/admin/cars", badge: 3 },
+    { label: "Cars ", icon: <Car size={18} />, to: "/admin/cars", badge: 3 },
     { label: "Users", icon: <Users size={18} />, to: "/admin/users" },
     { label: "Reservations", icon: <CalendarCheck size={18} />, to: "/admin/reservations" },
-    { label: "Configuration", icon: <Settings size={18} />, to: "/admin/configuration" },
   ];
 
   return (

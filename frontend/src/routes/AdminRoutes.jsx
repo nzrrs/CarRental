@@ -14,6 +14,7 @@ export default function AdminRoutes() {
             path: "/",
             Component : AdminLayout ,
             children:[
+                { index:true , element:<Dashboard />} ,
                 { path:"admin/dashboard" , element:<Dashboard />} ,
                 { path:"admin/agencies" , element:<ManageAgencies />} ,
                 { path:"admin/cars" , element:<ManageCars />} ,
