@@ -85,236 +85,364 @@ export const administrateurs = [
 ];
 
 // -------------------------------------------------------
-// 6. VOITURES (Cars)
+// 6. VEHICLES
 // -------------------------------------------------------
-export const voitures = [
+export const vehicles = [
   {
-    id: 1, matricule: "ABC-1234", marque: "BMW", modele: "X5",
-    anneeModele: 2023, kilometrage: 15000, nombrePlaces: 5,
-    prixJournalier: 1500,
-    estDisponible: true,
-    motorisation: "Diesel", transmission: "Automatique",
-    equipements: ["Climatisation", "GPS", "Bluetooth", "Sièges cuir", "Caméra de recul", "Toit panoramique"],
-    image: "bmw-x5.jpg", agenceId: 1, villeId: 1, categorieId: 1,
+    id: 1,
+    title: "BMW X5 2023",
+    type: "SUV",
+    rating: 4.8,
+    description: "High-end SUV combining power, comfort, and technology.",
+    img: "/vehicles/bmw-x5.jpg",
+    pricePerDay: 1500,
+
+    specs: {
+      brand: "BMW",
+      model: "X5",
+      year: 2023,
+      mileage: 15000,
+      seats: 5,
+      plateNumber: "ABC-1234",
+    },
+
+    features: {
+      fuel: "Diesel",
+      transmission: "Automatic",
+      ac: true,
+    },
+
+    equipment: [
+      { name: "GPS Navigation", type: "navigation" },
+      { name: "Bluetooth", type: "connectivity" },
+      { name: "Leather Seats", type: "comfort" },
+      { name: "Rear Camera", type: "safety" },
+    ],
+
+    availability: {
+      isAvailable: true,
+      availableFrom: "2026-01-01",
+      availableTo: "2026-12-31",
+      bookedDates: [],
+    },
+
+    agency: { id: 1, name: "Atlas Rentals", logo: "" },
   },
+
   {
-    id: 2, matricule: "DEF-5678", marque: "Mercedes", modele: "C-Class",
-    anneeModele: 2022, kilometrage: 22000, nombrePlaces: 5,
-    prixJournalier: 1200,
-    estDisponible: false,
-    motorisation: "Diesel", transmission: "Automatique",
-    equipements: ["Climatisation", "GPS", "Bluetooth", "Sièges cuir", "Capteurs de stationnement"],
-    image: "mercedes-c-class.jpg", agenceId: 4, villeId: 4, categorieId: 1,
+    id: 2,
+    title: "Mercedes C-Class 2022",
+    type: "Sedan",
+    rating: 4.5,
+    description: "Comfort-focused sedan with premium interior.",
+    img: "/vehicles/mercedes-c-class.jpg",
+    pricePerDay: 1200,
+
+    specs: {
+      brand: "Mercedes",
+      model: "C-Class",
+      year: 2022,
+      mileage: 22000,
+      seats: 5,
+      plateNumber: "DEF-5678",
+    },
+
+    features: {
+      fuel: "Diesel",
+      transmission: "Automatic",
+      ac: true,
+    },
+
+    equipment: [
+      { name: "GPS Navigation", type: "navigation" },
+      { name: "Parking Sensors", type: "safety" },
+      { name: "Bluetooth", type: "connectivity" },
+    ],
+
+    availability: {
+      isAvailable: false,
+      availableFrom: "2026-01-01",
+      availableTo: "2026-12-31",
+      bookedDates: [{ from: "2026-05-10", to: "2026-05-20" }],
+    },
+
+    agency: { id: 2, name: "Prestige Drive", logo: "" },
   },
+
   {
-    id: 3, matricule: "GHI-9012", marque: "Audi", modele: "A4",
-    anneeModele: 2023, kilometrage: 18000, nombrePlaces: 5,
-    prixJournalier: 1100,
-    estDisponible: true,
-    motorisation: "Diesel", transmission: "Automatique",
-    equipements: ["Climatisation", "GPS", "Bluetooth", "Sièges chauffants", "Toit ouvrant"],
-    image: "audi-a4.jpg", agenceId: 1, villeId: 1, categorieId: 1,
+    id: 3,
+    title: "Audi A4 2023",
+    type: "Sedan",
+    rating: 4.6,
+    description: "Balanced performance and comfort sedan.",
+    img: "/vehicles/audi-a4.jpg",
+    pricePerDay: 1100,
+
+    specs: {
+      brand: "Audi",
+      model: "A4",
+      year: 2023,
+      mileage: 18000,
+      seats: 5,
+      plateNumber: "GHI-9012",
+    },
+
+    features: {
+      fuel: "Diesel",
+      transmission: "Automatic",
+      ac: true,
+    },
+
+    equipment: [
+      { name: "Touch Screen", type: "tech" },
+      { name: "Bluetooth", type: "connectivity" },
+      { name: "Heated Seats", type: "comfort" },
+    ],
+
+    availability: {
+      isAvailable: true,
+      availableFrom: "2026-01-01",
+      availableTo: "2026-12-31",
+      bookedDates: [],
+    },
+
+    agency: { id: 1, name: "Atlas Rentals", logo: "" },
   },
+
   {
-    id: 4, matricule: "JKL-3456", marque: "Range Rover", modele: "Evoque",
-    anneeModele: 2022, kilometrage: 12000, nombrePlaces: 5,
-    prixJournalier: 1800,
-    estDisponible: true,
-    motorisation: "Hybride", transmission: "Automatique",
-    equipements: ["Climatisation", "GPS", "Bluetooth", "Sièges cuir", "Caméra 360°", "Toit panoramique"],
-    image: "range-rover-evoque.jpg", agenceId: 5, villeId: 5, categorieId: 1,
+    id: 4,
+    title: "Range Rover Evoque 2022",
+    type: "SUV",
+    rating: 4.9,
+    description: "Premium SUV with advanced comfort features.",
+    img: "/vehicles/range-rover-evoque.jpg",
+    pricePerDay: 1800,
+
+    specs: {
+      brand: "Range Rover",
+      model: "Evoque",
+      year: 2022,
+      mileage: 12000,
+      seats: 5,
+      plateNumber: "JKL-3456",
+    },
+
+    features: {
+      fuel: "Hybrid",
+      transmission: "Automatic",
+      ac: true,
+    },
+
+    equipment: [
+      { name: "360 Camera", type: "safety" },
+      { name: "Panoramic Roof", type: "luxury" },
+      { name: "GPS Navigation", type: "navigation" },
+    ],
+
+    availability: {
+      isAvailable: true,
+      availableFrom: "2026-01-01",
+      availableTo: "2026-12-31",
+      bookedDates: [],
+    },
+
+    agency: { id: 3, name: "Royal vehicles", logo: "" },
   },
+
   {
-    id: 5, matricule: "MNO-7890", marque: "Toyota", modele: "Land Cruiser",
-    anneeModele: 2023, kilometrage: 30000, nombrePlaces: 7,
-    prixJournalier: 2000,
-    estDisponible: false,
-    motorisation: "Diesel", transmission: "Automatique",
-    equipements: ["Climatisation", "GPS", "Bluetooth", "Sièges cuir", "Caméra de recul", "4x4 intégral"],
-    image: "toyota-land-cruiser.jpg", agenceId: 2, villeId: 2, categorieId: 3,
+    id: 5,
+    title: "Toyota Land Cruiser 2023",
+    type: "SUV",
+    rating: 4.7,
+    description: "Reliable off-road SUV with strong performance.",
+    img: "/vehicles/toyota-land-cruiser.jpg",
+    pricePerDay: 2000,
+
+    specs: {
+      brand: "Toyota",
+      model: "Land Cruiser",
+      year: 2023,
+      mileage: 30000,
+      seats: 7,
+      plateNumber: "MNO-7890",
+    },
+
+    features: {
+      fuel: "Diesel",
+      transmission: "Automatic",
+      ac: true,
+    },
+
+    equipment: [
+      { name: "4x4 Drive", type: "performance" },
+      { name: "Rear Camera", type: "safety" },
+      { name: "GPS Navigation", type: "navigation" },
+    ],
+
+    availability: {
+      isAvailable: false,
+      availableFrom: "2026-01-01",
+      availableTo: "2026-12-31",
+      bookedDates: [{ from: "2026-06-01", to: "2026-06-10" }],
+    },
+
+    agency: { id: 4, name: "Desert Rentals", logo: "" },
   },
+
   {
-    id: 6, matricule: "PQR-1234", marque: "Nissan", modele: "Patrol",
-    anneeModele: 2024, kilometrage: 8000, nombrePlaces: 7,
-    prixJournalier: 2200,
-    estDisponible: true,
-    motorisation: "Essence", transmission: "Automatique",
-    equipements: ["Climatisation", "GPS", "Bluetooth", "Sièges cuir", "Caméra 360°", "Toit panoramique", "4x4 intégral"],
-    image: "nissan-patrol.jpg", agenceId: 4, villeId: 4, categorieId: 3,
+    id: 6,
+    title: "Nissan Patrol 2024",
+    type: "SUV",
+    rating: 4.9,
+    description: "Powerful SUV with modern luxury features.",
+    img: "/vehicles/nissan-patrol.jpg",
+    pricePerDay: 2200,
+
+    specs: {
+      brand: "Nissan",
+      model: "Patrol",
+      year: 2024,
+      mileage: 8000,
+      seats: 7,
+      plateNumber: "PQR-1234",
+    },
+
+    features: {
+      fuel: "Petrol",
+      transmission: "Automatic",
+      ac: true,
+    },
+
+    equipment: [
+      { name: "360 Camera", type: "safety" },
+      { name: "Panoramic Roof", type: "luxury" },
+      { name: "GPS Navigation", type: "navigation" },
+    ],
+
+    availability: {
+      isAvailable: true,
+      availableFrom: "2026-01-01",
+      availableTo: "2026-12-31",
+      bookedDates: [],
+    },
+
+    agency: { id: 2, name: "Prestige Drive", logo: "" },
   },
+
   {
-    id: 7, matricule: "STU-5678", marque: "Hyundai", modele: "Tucson",
-    anneeModele: 2023, kilometrage: 25000, nombrePlaces: 5,
-    prixJournalier: 800,
-    estDisponible: true,
-    motorisation: "Diesel", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth", "Caméra de recul", "Écran tactile"],
-    image: "hyundai-tucson.jpg", agenceId: 8, villeId: 8, categorieId: 3,
+    id: 7,
+    title: "Hyundai Tucson 2023",
+    type: "SUV",
+    rating: 4.3,
+    description: "Comfortable SUV with good efficiency.",
+    img: "/vehicles/hyundai-tucson.jpg",
+    pricePerDay: 800,
+
+    specs: {
+      brand: "Hyundai",
+      model: "Tucson",
+      year: 2023,
+      mileage: 25000,
+      seats: 5,
+      plateNumber: "STU-5678",
+    },
+
+    features: {
+      fuel: "Diesel",
+      transmission: "Manual",
+      ac: true,
+    },
+
+    equipment: [
+      { name: "Bluetooth", type: "connectivity" },
+      { name: "Rear Camera", type: "safety" },
+    ],
+
+    availability: {
+      isAvailable: true,
+      availableFrom: "2026-01-01",
+      availableTo: "2026-12-31",
+      bookedDates: [],
+    },
+
+    agency: { id: 5, name: "City vehicles", logo: "" },
   },
+
   {
-    id: 8, matricule: "VWX-9012", marque: "Kia", modele: "Sportage",
-    anneeModele: 2022, kilometrage: 35000, nombrePlaces: 5,
-    prixJournalier: 750,
-    estDisponible: false,
-    motorisation: "Diesel", transmission: "Automatique",
-    equipements: ["Climatisation", "GPS", "Bluetooth", "Caméra de recul"],
-    image: "kia-sportage.jpg", agenceId: 6, villeId: 6, categorieId: 3,
+    id: 8,
+    title: "Kia Sportage 2022",
+    type: "SUV",
+    rating: 4.4,
+    description: "Stylish SUV perfect for family trips.",
+    img: "/vehicles/kia-sportage.jpg",
+    pricePerDay: 750,
+
+    specs: {
+      brand: "Kia",
+      model: "Sportage",
+      year: 2022,
+      mileage: 35000,
+      seats: 5,
+      plateNumber: "VWX-9012",
+    },
+
+    features: {
+      fuel: "Diesel",
+      transmission: "Automatic",
+      ac: true,
+    },
+
+    equipment: [
+      { name: "GPS Navigation", type: "navigation" },
+      { name: "Bluetooth", type: "connectivity" },
+    ],
+
+    availability: {
+      isAvailable: false,
+      availableFrom: "2026-01-01",
+      availableTo: "2026-12-31",
+      bookedDates: [{ from: "2026-05-15", to: "2026-05-18" }],
+    },
+
+    agency: { id: 3, name: "Royal vehicles", logo: "" },
   },
+
   {
-    id: 9, matricule: "YZA-3456", marque: "Dacia", modele: "Duster",
-    anneeModele: 2023, kilometrage: 40000, nombrePlaces: 5,
-    prixJournalier: 500,
-    estDisponible: true,
-    motorisation: "Diesel", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth", "Régulateur de vitesse"],
-    image: "dacia-duster.jpg", agenceId: 7, villeId: 7, categorieId: 3,
-  },
-  {
-    id: 10, matricule: "BCD-7890", marque: "Ford", modele: "Territory",
-    anneeModele: 2024, kilometrage: 5000, nombrePlaces: 5,
-    prixJournalier: 900,
-    estDisponible: true,
-    motorisation: "Essence", transmission: "Automatique",
-    equipements: ["Climatisation", "GPS", "Bluetooth", "Caméra 360°", "Écran tactile"],
-    image: "ford-territory.jpg", agenceId: 5, villeId: 5, categorieId: 3,
-  },
-  {
-    id: 11, matricule: "EFG-1234", marque: "Toyota", modele: "RAV4",
-    anneeModele: 2023, kilometrage: 20000, nombrePlaces: 5,
-    prixJournalier: 1000,
-    estDisponible: false,
-    motorisation: "Hybride", transmission: "Automatique",
-    equipements: ["Climatisation", "GPS", "Bluetooth", "Caméra de recul", "Toit panoramique"],
-    image: "toyota-rav4.jpg", agenceId: 1, villeId: 1, categorieId: 3,
-  },
-  {
-    id: 12, matricule: "HIJ-5678", marque: "Dacia", modele: "Logan",
-    anneeModele: 2023, kilometrage: 45000, nombrePlaces: 5,
-    prixJournalier: 300,
-    estDisponible: true,
-    motorisation: "Essence", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth", "Aide au stationnement"],
-    image: "dacia-logan.jpg", agenceId: 3, villeId: 3, categorieId: 2,
-  },
-  {
-    id: 13, matricule: "KLM-9012", marque: "Dacia", modele: "Sandero",
-    anneeModele: 2024, kilometrage: 10000, nombrePlaces: 5,
-    prixJournalier: 350,
-    estDisponible: true,
-    motorisation: "Essence", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth", "Écran tactile"],
-    image: "dacia-sandero.jpg", agenceId: 7, villeId: 7, categorieId: 2,
-  },
-  {
-    id: 14, matricule: "NOP-3456", marque: "Renault", modele: "Clio",
-    anneeModele: 2023, kilometrage: 28000, nombrePlaces: 5,
-    prixJournalier: 400,
-    estDisponible: false,
-    motorisation: "Essence", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth", "GPS", "Aide au stationnement"],
-    image: "renault-clio.jpg", agenceId: 2, villeId: 2, categorieId: 2,
-  },
-  {
-    id: 15, matricule: "QRS-7890", marque: "Peugeot", modele: "208",
-    anneeModele: 2024, kilometrage: 9000, nombrePlaces: 5,
-    prixJournalier: 450,
-    estDisponible: true,
-    motorisation: "Essence", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth", "Écran tactile", "Caméra de recul"],
-    image: "peugeot-208.jpg", agenceId: 8, villeId: 8, categorieId: 2,
-  },
-  {
-    id: 16, matricule: "TUV-1234", marque: "Volkswagen", modele: "Polo",
-    anneeModele: 2022, kilometrage: 32000, nombrePlaces: 5,
-    prixJournalier: 500,
-    estDisponible: false,
-    motorisation: "Essence", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth", "Régulateur de vitesse"],
-    image: "volkswagen-polo.jpg", agenceId: 6, villeId: 6, categorieId: 2,
-  },
-  {
-    id: 17, matricule: "WXY-5678", marque: "Hyundai", modele: "i10",
-    anneeModele: 2023, kilometrage: 15000, nombrePlaces: 5,
-    prixJournalier: 250,
-    estDisponible: true,
-    motorisation: "Essence", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth", "Direction assistée"],
-    image: "hyundai-i10.jpg", agenceId: 3, villeId: 3, categorieId: 2,
-  },
-  {
-    id: 18, matricule: "ZAB-9012", marque: "Toyota", modele: "Yaris",
-    anneeModele: 2024, kilometrage: 7000, nombrePlaces: 5,
-    prixJournalier: 450,
-    estDisponible: true,
-    motorisation: "Hybride", transmission: "Automatique",
-    equipements: ["Climatisation", "GPS", "Bluetooth", "Écran tactile"],
-    image: "toyota-yaris.jpg", agenceId: 1, villeId: 1, categorieId: 2,
-  },
-  {
-    id: 19, matricule: "CDE-3456", marque: "Hyundai", modele: "i10",
-    anneeModele: 2023, kilometrage: 20000, nombrePlaces: 5,
-    prixJournalier: 200,
-    estDisponible: true,
-    motorisation: "Essence", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth"],
-    image: "hyundai-i10-city.jpg", agenceId: 2, villeId: 2, categorieId: 5,
-  },
-  {
-    id: 20, matricule: "FGH-7890", marque: "Renault", modele: "Sandero",
-    anneeModele: 2024, kilometrage: 12000, nombrePlaces: 5,
-    prixJournalier: 250,
-    estDisponible: true,
-    motorisation: "Essence", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth", "Direction assistée"],
-    image: "renault-sandero.jpg", agenceId: 3, villeId: 3, categorieId: 5,
-  },
-  {
-    id: 21, matricule: "IJK-1234", marque: "Dacia", modele: "Logan",
-    anneeModele: 2023, kilometrage: 55000, nombrePlaces: 5,
-    prixJournalier: 220,
-    estDisponible: false,
-    motorisation: "Essence", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth"],
-    image: "dacia-logan-economique.jpg", agenceId: 7, villeId: 7, categorieId: 5,
-  },
-  {
-    id: 22, matricule: "LMN-5678", marque: "Suzuki", modele: "Alto",
-    anneeModele: 2024, kilometrage: 5000, nombrePlaces: 4,
-    prixJournalier: 180,
-    estDisponible: true,
-    motorisation: "Essence", transmission: "Manuelle",
-    equipements: ["Direction assistée", "Bluetooth"],
-    image: "suzuki-alto.jpg", agenceId: 8, villeId: 8, categorieId: 5,
-  },
-  {
-    id: 23, matricule: "OPQ-9012", marque: "Renault", modele: "Kangoo",
-    anneeModele: 2022, kilometrage: 60000, nombrePlaces: 2,
-    prixJournalier: 350,
-    estDisponible: true,
-    motorisation: "Diesel", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth", "Espace de chargement"],
-    image: "renault-kangoo.jpg", agenceId: 5, villeId: 5, categorieId: 4,
-  },
-  {
-    id: 24, matricule: "RST-3456", marque: "Citroën", modele: "Berlingo",
-    anneeModele: 2023, kilometrage: 30000, nombrePlaces: 2,
-    prixJournalier: 400,
-    estDisponible: true,
-    motorisation: "Diesel", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth", "GPS", "Espace de chargement"],
-    image: "citroen-berlingo.jpg", agenceId: 4, villeId: 4, categorieId: 4,
-  },
-  {
-    id: 25, matricule: "UVW-7890", marque: "Peugeot", modele: "Partner",
-    anneeModele: 2024, kilometrage: 8000, nombrePlaces: 2,
-    prixJournalier: 380,
-    estDisponible: false,
-    motorisation: "Diesel", transmission: "Manuelle",
-    equipements: ["Climatisation", "Bluetooth", "Caméra de recul", "Espace de chargement"],
-    image: "peugeot-partner.jpg", agenceId: 6, villeId: 6, categorieId: 4,
+    id: 9,
+    title: "Dacia Duster 2023",
+    type: "SUV",
+    rating: 4.2,
+    description: "Reliable and budget-friendly SUV.",
+    img: "/vehicles/dacia-duster.jpg",
+    pricePerDay: 500,
+
+    specs: {
+      brand: "Dacia",
+      model: "Duster",
+      year: 2023,
+      mileage: 40000,
+      seats: 5,
+      plateNumber: "YZA-3456",
+    },
+
+    features: {
+      fuel: "Diesel",
+      transmission: "Manual",
+      ac: true,
+    },
+
+    equipment: [{ name: "Bluetooth", type: "connectivity" }],
+
+    availability: {
+      isAvailable: true,
+      availableFrom: "2026-01-01",
+      availableTo: "2026-12-31",
+      bookedDates: [],
+    },
+
+    agency: { id: 5, name: "City vehicles", logo: "" },
   },
 ];
-
 // -------------------------------------------------------
 // 7. RESERVATIONS (Bookings)
 //    Statuses: EN_ATTENTE, CONFIRMEE, REFUSEE, EN_COURS, TERMINEE, ANNULEE
@@ -358,4 +486,4 @@ export const reservations = [
 ];
 
 // Default export
-export default { utilisateurs, agences, administrateurs, voitures, reservations, villes, categories };
+export default { utilisateurs, agences, administrateurs, vehicles, reservations, villes, categories };

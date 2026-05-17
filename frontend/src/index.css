@@ -22,3 +22,42 @@ body {
 button {
   cursor: pointer;
 }
+
+/* Brands Animation */
+
+.banner {
+  overflow: hidden;
+  padding: 30px 0;
+  background-color: #FAFAFA;
+  border-radius: 40px;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 90px;
+  width: max-content;
+  animation: move 20s linear infinite;
+}
+
+.track img {
+  height: 70px;
+  width: 70px;
+  filter: brightness(0) saturate(100%);
+  opacity: 0.9;
+  transition: 0.3s;
+}
+
+.track img:hover {
+  transform: scale(1.15);
+  opacity: 1;
+}
+
+@keyframes move {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

@@ -51,7 +51,7 @@ export default function HomeHero() {
     <>
       {/* HERO SECTION CONTAINER */}
       <div
-        className="bg-cover bg-center lg:bg-left min-h-125 lg:min-h-150 rounded-[40px] p-6 md:p-12 lg:p-18 flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-between overflow-hidden"
+        className="bg-cover bg-center lg:bg-left min-h-125 lg:min-h-150 rounded-[40px] p-6  md:p-12 lg:p-18 flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-between overflow-hidden"
         style={{ backgroundImage: `url(${heroBg})` }}
       >
         {/* TEXT SECTION */}

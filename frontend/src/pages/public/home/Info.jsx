@@ -32,7 +32,7 @@ export default function Info() {
       {infoCards.map((card) => (
         <div
           key={card.title}
-          className="group flex flex-col gap-5 items-center text-center h-full min-h-65 p-4"
+          className="group flex flex-col gap-2 items-center text-center h-full min-h-65 p-4"
         >
           {/* ICON */}
           <div className="w-16 h-16 flex items-center justify-center">
