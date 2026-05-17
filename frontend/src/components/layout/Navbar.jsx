@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import CarRentalLogo from "../../../assets/images/car_logo.png";
-import SupportIcon from "../../../assets/images/phone_blue_icon.png";
-import Info from "./Info.jsx";
+import CarRentalLogo from "../../assets/images/car_logo.png";
+import SupportIcon from "../../assets/images/phone_blue_icon.png";
+import Info from "../ui/ContactBlock.jsx";
 
 const NAV_LINKS = [
   { label: "Home", to: "/" },
@@ -53,10 +53,16 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-backdrop-filter:bg-white/90">
       <div className="container">
         <div className="flex items-center justify-between py-4">
-          <div className="flex shrink-0 items-center gap-2">
-            <img src={CarRentalLogo} alt="Car Rental" className="h-8 w-auto" />
-            <h1 className="hidden text-lg font-bold sm:block">Car Rental</h1>
-          </div>
+          <Link to="/">
+            <div className="flex shrink-0 items-center gap-2">
+              <img
+                src={CarRentalLogo}
+                alt="Car Rental"
+                className="h-8 w-auto"
+              />
+              <h1 className="hidden text-lg font-bold sm:block">Car Rental</h1>
+            </div>
+          </Link>
 
           <div className="hidden items-center gap-8 lg:flex">
             {NAV_LINKS.map(({ label, to }) => (

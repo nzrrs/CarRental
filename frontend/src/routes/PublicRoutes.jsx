@@ -1,9 +1,9 @@
 // Layouts 
-import PublicLayout from "../pages/public/layout/PublicLayout";
+import PublicLayout from "../components/layout/PublicLayout";
 
 // Pages
-import HomePage from "../pages/public/publicPages/HomePage";
-import AboutPage from "../pages/public/publicPages/AboutPage";
+import HomePage from "../pages/public/home/Home";
+import AboutPage from "../pages/public/about/About";
 
 // React Router
 import { createBrowserRouter , RouterProvider } from "react-router-dom";

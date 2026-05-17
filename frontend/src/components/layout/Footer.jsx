@@ -1,8 +1,8 @@
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import CarRentalLogo from "../../../assets/images/car_logo.png";
-import supportIcon from "../../../assets/images/phone_blue_icon.png";
-import Info from "./Info.jsx";
+import CarRentalLogo from "../../assets/images/car_logo.png";
+import supportIcon from "../../assets/images/phone_blue_icon.png";
+import Info from "../ui/ContactBlock.jsx";
 
 const SOCIAL_LINKS = [
   { Icon: FaFacebook, url: "#", label: "Facebook" },

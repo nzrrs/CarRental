@@ -7,7 +7,7 @@ const openDatePicker = (e) => {
   e.target.focus();
 };
 
-export default function HomePage() {
+export default function HomeHero() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     carType: "",
@@ -20,6 +20,7 @@ export default function HomePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Turn formData into query params and navigate to /vehicles (object -> array(to filter out empty values) -> object -> query params)
     const filteredData = Object.fromEntries(
       Object.entries(formData).filter(([, value]) => value !== ""),
     );
@@ -47,9 +48,10 @@ export default function HomePage() {
   };
 
   return (
-    <div className="container">
+    <>
+      {/* HERO SECTION CONTAINER */}
       <div
-        className="bg-cover bg-center min-h-125 lg:min-h-150 rounded-[40px] p-6 md:p-12 lg:p-18 flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-between"
+        className="bg-cover bg-center lg:bg-left min-h-125 lg:min-h-150 rounded-[40px] p-6 md:p-12 lg:p-18 flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-between overflow-hidden"
         style={{ backgroundImage: `url(${heroBg})` }}
       >
         {/* TEXT SECTION */}
@@ -63,7 +65,7 @@ export default function HomePage() {
             iste nisi?
           </p>
           <NavLink
-            to="/cars"
+            to="/vehicles"
             className="inline-block bg-[#FF9E0C] text-white px-6 py-3 rounded-xl transition hover:bg-amber-500 font-semibold"
           >
             View all cars
@@ -86,7 +88,6 @@ export default function HomePage() {
                 id="carType"
                 value={formData.carType}
                 onChange={handleChange}
-                defaultValue=""
                 className="block w-full rounded-xl bg-[#FAFAFA] py-3 px-3 outline-none appearance-none cursor-pointer placeholder:text-gray-400"
               >
                 <option value="" disabled>
@@ -215,6 +216,6 @@ export default function HomePage() {
           </button>
         </form>
       </div>
-    </div>
+    </>
   );
 }
