@@ -73,7 +73,8 @@ export default function CountUp({
   useEffect(() => {
     const unsubscribe = springValue.on("change", (latest) => {
       if (ref.current) {
-        const clean = Math.round(latest);
+        const numeric = typeof latest === "number" ? latest : Number.parseFloat(String(latest));
+        const clean = Number.isFinite(numeric) ? Math.round(numeric) : 0;
         ref.current.textContent = formatNumber(clean);
       }
     });
@@ -83,7 +84,8 @@ export default function CountUp({
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.textContent = formatNumber(direction === "down" ? to : from);
+      const startValue = Number(direction === "down" ? to : from);
+      ref.current.textContent = formatNumber(Number.isFinite(startValue) ? startValue : 0);
     }
   }, [from, to, direction]);
 

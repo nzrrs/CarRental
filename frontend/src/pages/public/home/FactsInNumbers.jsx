@@ -44,7 +44,7 @@ function FactsInNumbers() {
   return (
     <div
       ref={ref}
-      className="bg-cover bg-center rounded-[20px] p-6 lg:p-10 flex flex-col gap-10 w-full"
+      className="bg-cover bg-center rounded-[20px] p-6 lg:p-10 flex flex-col gap-10 w-full mb-15"
       style={{ backgroundImage: `url(${counterImg})` }}
     >
       {/* TEXT */}
