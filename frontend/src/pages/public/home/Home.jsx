@@ -3,6 +3,7 @@ import Info from "./Info";
 import FeaturedCars from "./FeaturedCars";
 import BrandsAnimation from "./BrandsAnimation";
 import HowItWorks from "./HowItWorks";
+import FactsInNumbers from "./FactsInNumbers";
 export default function HomePage() {
   return (
     <div className="container">
@@ -11,6 +12,7 @@ export default function HomePage() {
         <FeaturedCars />
         <BrandsAnimation />
         <HowItWorks />
+        <FactsInNumbers />
     </div>
   )
 }

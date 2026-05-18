@@ -1,6 +1,6 @@
-import carSide from "../../../assets/images/car_side.svg";
-import location from "../../../assets/images/location.svg";
-import wallet from "../../../assets/images/wallet.svg";
+import carSide from "../../../assets/icons/car_side.svg";
+import location from "../../../assets/icons/location.svg";
+import wallet from "../../../assets/icons/wallet.svg";
 
 const infoCards = [
   {

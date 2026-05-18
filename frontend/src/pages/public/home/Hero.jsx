@@ -204,8 +204,7 @@ export default function HomeHero() {
                 checked={sameLocation}
                 onChange={handleSameLocation}
                 className="w-4 h-4 rounded border-gray-300 cursor-pointer"
-              />
-              Same as pickup location
+              />Same as pickup location
             </label>
           </div>
 
