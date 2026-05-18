@@ -66,9 +66,9 @@ export default function HomeHero() {
           </p>
           <NavLink
             to="/vehicles"
-            className="inline-block bg-[#FF9E0C] text-white px-6 py-3 rounded-xl transition hover:bg-amber-500 font-semibold"
+            className="inline-flex items-center px-4 py-3 bg-[#FF9E0C] text-white font-medium w-fit text-sm sm:text-base lg:text-lg rounded-lg transition-colors duration-300 hover:bg-[#e68f0a]"
           >
-            View all cars
+            View All Cars
           </NavLink>
         </div>
 
@@ -204,13 +204,14 @@ export default function HomeHero() {
                 checked={sameLocation}
                 onChange={handleSameLocation}
                 className="w-4 h-4 rounded border-gray-300 cursor-pointer"
-              />Same as pickup location
+              />
+              Same as pickup location
             </label>
           </div>
 
           <button
             type="submit"
-            className="rounded-md bg-[#FF9E0C] p-3 text-white transition hover:bg-amber-500 focus:outline-none font-semibold"
+            className="rounded-lg bg-[#FF9E0C] px-4 py-3 text-white font-semibold transition-colors duration-300 hover:bg-[#e68f0a] focus:outline-none"
           >
             Search
           </button>
