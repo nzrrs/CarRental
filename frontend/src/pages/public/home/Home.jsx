@@ -22,3 +22,5 @@ export default function HomePage() {
 // 2. Create a loading state for both components while fetching data
 // 3. Create error handling for both components in case of any errors while fetching data
 // 4. Dark mode support
+// 5. Add location helper
+// 6. Change the car card styling and add favorites

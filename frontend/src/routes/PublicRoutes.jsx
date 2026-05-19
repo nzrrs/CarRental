@@ -3,6 +3,7 @@ import PublicLayout from "../components/layout/PublicLayout";
 
 // Pages
 import HomePage from "../pages/public/home/Home";
+import VehiclesPage from "../pages/public/vehicles/Vehicles";
 import AboutPage from "../pages/public/about/About";
 
 // React Router
@@ -16,6 +17,7 @@ export default function PublicRoutes() {
             element: <PublicLayout />,
             children: [
                 { index: true, element: <HomePage /> },
+                { path: "/vehicles", element: <VehiclesPage /> },
                 { path: "/about", element: <AboutPage /> }
             ]
         }

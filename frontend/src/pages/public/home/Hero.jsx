@@ -12,11 +12,9 @@ export default function HomeHero() {
   const [formData, setFormData] = useState({
     carType: "",
     pickupLocation: "",
-    returnLocation: "",
     pickupDate: "",
     returnDate: "",
   });
-  const [sameLocation, setSameLocation] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,18 +31,7 @@ export default function HomeHero() {
     setFormData((prev) => ({
       ...prev,
       [id]: value,
-      ...(id === "pickupLocation" && sameLocation && { returnLocation: value }),
     }));
-  };
-
-  const handleSameLocation = (e) => {
-    setSameLocation(e.target.checked);
-    if (e.target.checked) {
-      setFormData((prev) => ({
-        ...prev,
-        returnLocation: prev.pickupLocation,
-      }));
-    }
   };
 
   return (
@@ -135,7 +122,7 @@ export default function HomeHero() {
                 placeholder="Place of rental"
               />
               <svg
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none text-gray-400"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none text-gray-900"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -144,33 +131,15 @@ export default function HomeHero() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  d="M12 21s7-5.686 7-11a7 7 0 10-14 0c0 5.314 7 11 7 11z"
                 />
-              </svg>
-            </div>
-
-            {/* RETURN LOCATION */}
-            <div className="relative">
-              <input
-                type="text"
-                id="returnLocation"
-                value={formData.returnLocation}
-                onChange={handleChange}
-                disabled={sameLocation}
-                className="block w-full rounded-xl bg-[#FAFAFA] py-3 px-3 outline-none text-gray-900 placeholder:text-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
-                placeholder="Place of return"
-              />
-              <svg
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
+                <circle
+                  cx="12"
+                  cy="10"
+                  r="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
                 />
               </svg>
             </div>
@@ -196,21 +165,11 @@ export default function HomeHero() {
               onFocus={openDatePicker}
               className="block w-full rounded-xl bg-[#FAFAFA] py-3 px-3 outline-none cursor-pointer text-gray-900"
             />
-
-            {/* SAME LOCATION CHECKBOX */}
-            <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-700 pl-1">
-              <input
-                type="checkbox"
-                checked={sameLocation}
-                onChange={handleSameLocation}
-                className="w-4 h-4 rounded border-gray-300 cursor-pointer"
-              />Same as pickup location
-            </label>
           </div>
 
           <button
             type="submit"
-            className="rounded-lg bg-[#FF9E0C] px-4 py-3 text-white font-semibold transition-colors duration-300 hover:bg-[#e68f0a] focus:outline-none"
+            className="rounded-lg bg-[#FF9E0C] px-4 py-3 text-white font-semibold transition-colors duration-300 hover:bg-[#e68f0a] focus:outline-none flex-1"
           >
             Search
           </button>
