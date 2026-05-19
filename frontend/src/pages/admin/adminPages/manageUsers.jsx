@@ -50,9 +50,9 @@ export default function ManageUsers() {
     // enrich clients with bookings and lastLogin data
     const rows = useMemo(() => {
         return utilisateurs.map((u, i) => {
-            const bookings = c.bookings ?? ((i * 3) % 12);
-            const lastLogin = c.lastLogin ?? new Date(Date.now() - (i % 7) * 3600_000 * 6).toISOString();
-            return { ...c, bookings, lastLogin };
+            const bookings = u.bookings ?? ((i * 3) % 12);
+            const lastLogin = u.lastLogin ?? new Date(Date.now() - (i % 7) * 3600_000 * 6).toISOString();
+            return { ...u, bookings, lastLogin };
         });
     }, []);
 
