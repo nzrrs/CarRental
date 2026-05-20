@@ -1,5 +1,5 @@
 import PublicRoutes from "./routes/PublicRoutes";
-import AdminRoutes from "./routes/adminRoutes"
+import AdminRoutes from "./routes/AdminRoutes"
 
 function App() {
   return (  
