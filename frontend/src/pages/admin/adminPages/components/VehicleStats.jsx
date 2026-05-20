@@ -1,8 +1,8 @@
-import { voitures } from "../../../../data/data";
+import { vehicles } from "../../../../data/data";
 
 export default function VehicleStats() {
-  const total = voitures.length;
-  const available = voitures.filter((v) => v.estDisponible).length;
+  const total = vehicles.length;
+  const available = vehicles.filter((v) => v.availability.isAvailable).length;
   const unavailable = total - available;
   const maintenance = Math.floor(total * 0.036); // ~3.6% in maintenance
 

@@ -4,7 +4,7 @@
 
 
 import { useMemo, useState } from "react";
-import { utilisateurs, voitures, agences, reservations as reservationsData } from "../../../data/data";
+import { utilisateurs, vehicles, agences, reservations as reservationsData } from "../../../data/data";
 import { twMerge as merge } from "tailwind-merge";
 import { Eye, Edit, Search, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
 
@@ -41,8 +41,8 @@ function PaymentPill({ paid }) {
 function VehicleCell({ car }) {
     return (
         <div className="text-sm text-slate-700">
-            <div className="font-medium">{car.marque} {car.modele}</div>
-            <div className="text-xs text-slate-500">Plate: {car.plate || "N/A"}</div>
+            <div className="font-medium">{car?.specs?.brand} {car?.specs?.model}</div>
+            <div className="text-xs text-slate-500">Plate: {car?.specs?.plateNumber || "N/A"}</div>
         </div>
     );
 }
@@ -57,14 +57,14 @@ export default function ManageReservations() {
     const reservations = useMemo(() => {
         return reservationsData.map((r) => {
             const client = utilisateurs.find((u) => u.id === r.clientId);
-            const voiture = voitures.find((v) => v.id === r.voitureId);
-            const agence = agences.find((a) => a.id === voiture?.agenceId);
+            const vehicle = vehicles.find((v) => v.id === r.voitureId);
+            const agency = agences.find((a) => a.id === vehicle?.agency?.id);
             return {
                 id: r.id,
                 client,
                 phone: client?.telephone || "",
-                car: { ...voiture, plate: r.id.replace("R-", "PLT-") },
-                agency: agence,
+                car: vehicle,
+                agency,
                 start: r.dateDebut,
                 end: r.dateFin,
                 days: r.nombreJours,
@@ -77,11 +77,11 @@ export default function ManageReservations() {
 
     const filtered = useMemo(() => {
         return reservations.filter((r) => {
-            if (agencyFilter && r.agency.nom !== agencyFilter) return false;
+            if (agencyFilter && r.agency?.nom !== agencyFilter) return false;
             if (statusFilter && r.status !== statusFilter) return false;
             if (!query) return true;
             const q = query.toLowerCase();
-            return r.id.toLowerCase().includes(q) || r.client.nom.toLowerCase().includes(q);
+            return r.id.toLowerCase().includes(q) || (r.client?.nom || "").toLowerCase().includes(q);
         });
     }, [reservations, agencyFilter, statusFilter, query]);
 
@@ -138,7 +138,7 @@ export default function ManageReservations() {
                                     <td className="px-4 py-3 text-sm font-medium text-slate-800">{r.id}</td>
                                     <td className="px-4 py-3">
                                         <div className="text-sm text-slate-700">
-                                            <div className="font-medium">{r.client.nom}</div>
+                                            <div className="font-medium">{r.client?.nom || "Unknown"}</div>
                                             <div className="text-xs text-slate-500">{r.phone}</div>
                                         </div>
                                     </td>

@@ -1,6 +1,6 @@
 
 import { useState, useMemo } from "react";
-import { voitures, agences } from "../../../data/data";
+import { vehicles, agences } from "../../../data/data";
 import VehicleStats from "./components/VehicleStats";
 import VehicleFilters from "./components/VehicleFilters";
 import VehicleTable from "./components/VehicleTable";
@@ -12,18 +12,18 @@ export default function ManageCars() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredVehicles = useMemo(() => {
-    return voitures.filter((vehicle) => {
+    return vehicles.filter((vehicle) => {
       const matchesSearch =
-        vehicle.marque.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        vehicle.modele.toLowerCase().includes(searchQuery.toLowerCase());
+        vehicle.specs.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        vehicle.specs.model.toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesStatus =
         statusFilter === "all" ||
-        (statusFilter === "available" && vehicle.estDisponible) ||
-        (statusFilter === "rented" && !vehicle.estDisponible);
+        (statusFilter === "available" && vehicle.availability.isAvailable) ||
+        (statusFilter === "rented" && !vehicle.availability.isAvailable);
 
       const matchesAgency =
-        agencyFilter === "all" || vehicle.agenceId === parseInt(agencyFilter);
+        agencyFilter === "all" || vehicle.agency.id === parseInt(agencyFilter);
 
       return matchesSearch && matchesStatus && matchesAgency;
     });

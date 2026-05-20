@@ -486,8 +486,4 @@ export const reservations = [
 ];
 
 // Default export
-<<<<<<< HEAD
 export default { utilisateurs, agences, administrateurs, vehicles, reservations, villes, categories };
-=======
-export default { utilisateurs, agences, administrateurs, voitures, reservations, villes, categories };
->>>>>>> ba63f3a (modify the data)

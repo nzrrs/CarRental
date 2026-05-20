@@ -2,9 +2,9 @@ import PublicRoutes from "./routes/PublicRoutes";
 import AdminRoutes from "./routes/adminRoutes"
 
 function App() {
-  return (
+  return (  
     <PublicRoutes />
-    <AdminRoutes />
+    // <AdminRoutes />
   )
 }
 
