@@ -22,7 +22,7 @@ export default function Search() {
   }
 
   return (
-    <form className="flex w-full flex-col gap-4 rounded-2xl bg-white px-4 py-4 shadow-sm md:flex-row md:items-center md:gap-0 my-4">
+    <form className="flex w-full flex-col gap-4 rounded-[10px] bg-white px-4 py-4 shadow-sm md:flex-row md:items-center md:gap-0 my-4">
       {/* LOCATION */}
       <div className="flex w-full items-center justify-between gap-4 px-2 md:px-4">
         <div className="flex w-full min-w-0 flex-col">

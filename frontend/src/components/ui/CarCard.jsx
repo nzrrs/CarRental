@@ -21,7 +21,7 @@ export default function CarCard({
   const filledStars = Math.round(normalizedRating);
 
   return (
-    <div className="flex h-full w-full max-w-101.5 flex-col items-center gap-6 overflow-hidden rounded-[20px] border border-[#ECECEC] bg-[#FAFAFA] p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
+    <div className="flex h-auto w-full flex-col items-center gap-6 overflow-hidden rounded-[20px] border border-[#ECECEC] bg-[#FAFAFA] p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
 
       {/* IMAGE */}
       <img

@@ -3,8 +3,8 @@ import AdminRoutes from "./routes/AdminRoutes"
 
 function App() {
   return (  
-    // <PublicRoutes />
-    <AdminRoutes />
+    <PublicRoutes />
+    // <AdminRoutes />
   )
 }
 
