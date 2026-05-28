@@ -1,9 +1,6 @@
 import React from 'react'
-import Cars from '../pages/Cars'
-import Dashboard from '../pages/Dashboard'
-import Reservations from '../pages/Reservations'
-import { Routes, Route } from 'react-router-dom'
 
+import RRoutesAG from '../routes/AgencyRoutes/RRoutesAG'
 import '../App.css'
 import Asideagency from './Asideagency'
 
@@ -23,21 +20,11 @@ const Layout = () => {
       <Asideagency onNavigate={() => setIsSidebarOpen(false)} />
       <div className="content">
         <header className="topbar">
-          <button
-            className="icon-button sidebar-toggle"
-            type="button"
-            aria-label="Open menu"
-            aria-expanded={isSidebarOpen}
-            aria-controls="agency-sidebar"
-            onClick={() => setIsSidebarOpen((prev) => !prev)}
-          >
-            <span className="hamburger" aria-hidden="true" />
-          </button>
           <div className="search">
             <input
               type="search"
               placeholder="Search cars, customers, or bookings..."
-            />
+          />
           </div>
           <div className="topbar-actions">
             
@@ -51,11 +38,7 @@ const Layout = () => {
           </div>
         </header>
         <main>
-          <Routes>
-            <Route path="/cars" element={<Cars />} />
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/reservations" element={<Reservations />} />
-          </Routes>
+    <RRoutesAG/>      
         </main>
       </div>
     </div>
