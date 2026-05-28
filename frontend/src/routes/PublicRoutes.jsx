@@ -1,30 +1,30 @@
-// Layouts 
 import PublicLayout from "../components/layout/PublicLayout";
+import NoFooterLayout from "../components/layout/NoFooterLayout";
 
-// Pages
 import HomePage from "../pages/public/home/Home";
 import VehiclesPage from "../pages/public/vehicles/Vehicles";
 import AboutPage from "../pages/public/about/About";
 
-// React Router
-import { createBrowserRouter , RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 export default function PublicRoutes() {
-    const router = createBrowserRouter([
-        {
-            // Public routes will be nested inside the PublicLayout
-            path: "/",
-            element: <PublicLayout />,
-            children: [
-                { index: true, element: <HomePage /> },
-                { path: "/vehicles", element: <VehiclesPage /> },
-                { path: "/about", element: <AboutPage /> }
-            ]
-        }
-    ]);
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <PublicLayout />,
+      children: [
+        { index: true, element: <HomePage /> },
+        { path: "about", element: <AboutPage /> },
+      ],
+    },
+    {
+      path: "/vehicles",
+      element: <NoFooterLayout />,
+      children: [
+        { index: true, element: <VehiclesPage /> },
+      ],
+    },
+  ]);
 
-   return(
-        <RouterProvider router={router}/>
-    )
-    
+  return <RouterProvider router={router} />;
 }

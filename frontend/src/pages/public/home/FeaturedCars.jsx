@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { vehicles } from "../../../data/data.js";
 import CarCard from "../../../components/ui/CarCard.jsx";
 
-import vehicleTransparent from "../../../assets/images/vehicle_transparent.png";
+
 
 function FeaturedCars() {
   return (
@@ -47,16 +47,10 @@ function FeaturedCars() {
       </div>
       {/* CARS CONTAINER */}
       <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9">
-        {vehicles.slice(0, 6).map((car) => (
+        {vehicles.slice(0, 6).map((vehicle) => (
           <CarCard
-            key={car.id}
-            id={car.id}
-            img={vehicleTransparent}
-            title={car.title}
-            rating={car.rating}
-            type={car.type}
-            pricePerDay={car.pricePerDay}
-            features={car.features}
+            key={vehicle.id}
+            vehicle={vehicle}
           />
         ))}
       </div>

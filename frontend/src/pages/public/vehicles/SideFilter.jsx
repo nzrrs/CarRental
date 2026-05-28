@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-
 const carTypeOptions = [
   { value: "all", label: "All" },
   { value: "sedan", label: "Sedan" },
@@ -33,11 +32,9 @@ const fuelOptions = [
 ];
 
 const agencyOptions = [
-  { value: "fastcar", label: "FastCar Rentals" },
-  { value: "speedy", label: "Speedy Drive" },
-  { value: "urban", label: "Urban Wheels" },
-  { value: "elite", label: "Elite Motors" },
-  { value: "prime", label: "Prime Rentals" },
+  { value: "atlas rentals", label: "Atlas Rentals" },
+  { value: "prestige drive", label: "Prestige Drive" },
+  { value: "royal vehicles", label: "Royal Vehicles" },
 ];
 
 function FilterSection({ title, children, defaultOpen = true, sectionId }) {
@@ -55,6 +52,7 @@ function FilterSection({ title, children, defaultOpen = true, sectionId }) {
           className="flex cursor-pointer list-none items-center justify-between gap-3 text-xs font-semibold text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/80 sm:text-sm [&::-webkit-details-marker]:hidden"
         >
           <span>{title}</span>
+
           <svg
             aria-hidden="true"
             className="h-4 w-4 text-muted-foreground transition-transform group-open:rotate-180"
@@ -70,58 +68,19 @@ function FilterSection({ title, children, defaultOpen = true, sectionId }) {
             />
           </svg>
         </summary>
+
         <div className="mt-3">{children}</div>
       </details>
     </div>
   );
 }
 
-FilterSection.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-  defaultOpen: PropTypes.bool,
-  sectionId: PropTypes.string,
-};
-
-function CheckboxGroup({ name, options }) {
-  const allValue = options[0]?.value ?? "all";
-  const [selected, setSelected] = useState(() => new Set([allValue]));
-
-  const handleToggle = (value) => {
-    setSelected((prev) => {
-      const next = new Set(prev);
-      if (value === allValue) {
-        if (next.has(allValue)) {
-          next.delete(allValue);
-          return next;
-        }
-
-        CheckboxGroup.propTypes = {
-          name: PropTypes.string.isRequired,
-          options: PropTypes.arrayOf(
-            PropTypes.shape({
-              value: PropTypes.string.isRequired,
-              label: PropTypes.string.isRequired,
-            })
-          ).isRequired,
-        };
-        return new Set([allValue]);
-      }
-      if (next.has(value)) {
-        next.delete(value);
-      } else {
-        next.add(value);
-      }
-      next.delete(allValue);
-      return next;
-    });
-  };
-
+function CheckboxGroup({ name, options, selected, onChange }) {
   return (
     <div className="flex flex-col gap-1.5">
       {options.map((option) => {
         const optionId = `${name}-${option.value}`;
-        const isChecked = selected.has(option.value);
+        const isChecked = selected === option.value;
 
         return (
           <label
@@ -132,10 +91,10 @@ function CheckboxGroup({ name, options }) {
             <input
               id={optionId}
               name={name}
-              type="checkbox"
+              type="radio"
               checked={isChecked}
-              onChange={() => handleToggle(option.value)}
-              className="h-4 w-4 accent-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/80"
+              onChange={() => onChange(option.value)}
+              className="h-4 w-4 accent-blue-600"
             />
             <span>{option.label}</span>
           </label>
@@ -145,25 +104,23 @@ function CheckboxGroup({ name, options }) {
   );
 }
 
-function SelectField({ id, options, labelledBy }) {
+function SelectField({ value, onChange, options }) {
   return (
     <div className="relative">
       <select
-        id={id}
-        name={id}
-        aria-labelledby={labelledBy}
-        defaultValue=""
+        value={value}
+        onChange={onChange}
         className="w-full min-h-11 appearance-none rounded-md border border-gray-200 bg-white px-3 py-2.5 pr-9 text-sm text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/80 sm:text-base"
       >
-        <option value="" disabled>
-          Select agency
-        </option>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
+        <option value="all">All</option>
+
+        {options.map((opt) => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
           </option>
         ))}
       </select>
+
       <svg
         aria-hidden="true"
         className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
@@ -182,44 +139,122 @@ function SelectField({ id, options, labelledBy }) {
   );
 }
 
-SelectField.propTypes = {
-  id: PropTypes.string.isRequired,
+export default function SideFilter({ filters, setFilters }) {
+  return (
+    <form className="w-full shrink-0 rounded-[10px] border border-gray-200 bg-white shadow md:w-70">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-200 p-4">
+        <p className="text-lg font-bold text-gray-900 sm:text-xl">Filters</p>
+
+        <button
+          type="reset"
+          className="text-xs font-medium text-blue-600 hover:text-blue-500"
+          onClick={() =>
+            setFilters({
+              carType: "all",
+              seats: "all",
+              transmission: "all",
+              fuel: "all",
+              agency: "all",
+            })
+          }
+        >
+          Clear all
+        </button>
+      </div>
+
+      {/* Car type */}
+      <FilterSection title="Car type">
+        <CheckboxGroup
+          name="car-type"
+          options={carTypeOptions}
+          selected={filters.carType}
+          onChange={(v) => setFilters({ ...filters, carType: v })}
+        />
+      </FilterSection>
+
+      {/* Seats */}
+      <FilterSection title="Seats">
+        <CheckboxGroup
+          name="seats"
+          options={seatOptions}
+          selected={filters.seats}
+          onChange={(v) => setFilters({ ...filters, seats: v })}
+        />
+      </FilterSection>
+
+      {/* Transmission */}
+      <FilterSection title="Transmission">
+        <CheckboxGroup
+          name="transmission"
+          options={transmissionOptions}
+          selected={filters.transmission}
+          onChange={(v) =>
+            setFilters({ ...filters, transmission: v })
+          }
+        />
+      </FilterSection>
+
+      {/* Fuel */}
+      <FilterSection title="Fuel type">
+        <CheckboxGroup
+          name="fuel"
+          options={fuelOptions}
+          selected={filters.fuel}
+          onChange={(v) => setFilters({ ...filters, fuel: v })}
+        />
+      </FilterSection>
+
+      {/* Agency */}
+      <FilterSection title="Agency">
+        <SelectField
+          value={filters.agency}
+          options={agencyOptions}
+          onChange={(e) =>
+            setFilters({ ...filters, agency: e.target.value })
+          }
+        />
+      </FilterSection>
+    </form>
+  );
+}
+
+FilterSection.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  defaultOpen: PropTypes.bool,
+  sectionId: PropTypes.string,
+};
+
+CheckboxGroup.propTypes = {
+  name: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })
   ).isRequired,
-  labelledBy: PropTypes.string,
+  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
-export default function SideFilter() {
-  return (
-    <form className="w-full shrink-0 rounded-[10px] border border-gray-200 bg-white shadow md:w-70">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-200 p-4">
-        <p className="text-lg font-bold text-gray-900 sm:text-xl">Filters</p>
-        <button
-          type="reset"
-          className="text-xs font-medium text-blue-600 hover:text-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/80 sm:text-sm"
-        >
-          Clear all
-        </button>
-      </div>
-      <FilterSection title="Car type" sectionId="car-type-filter">
-        <CheckboxGroup name="car-type" options={carTypeOptions} />
-      </FilterSection>
-      <FilterSection title="Seats" sectionId="seats-filter">
-        <CheckboxGroup name="seats" options={seatOptions} />
-      </FilterSection>
-      <FilterSection title="Transmission" sectionId="transmission-filter">
-        <CheckboxGroup name="transmission" options={transmissionOptions} />
-      </FilterSection>
-      <FilterSection title="Fuel type" sectionId="fuel-type-filter">
-        <CheckboxGroup name="fuel" options={fuelOptions} />
-      </FilterSection>
-      <FilterSection title="Agency" sectionId="agency-filter">
-        <SelectField id="agency-select" options={agencyOptions} labelledBy="agency-filter" />
-      </FilterSection>
-    </form>
-  );
-}
+SelectField.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
+
+SideFilter.propTypes = {
+  filters: PropTypes.shape({
+    carType: PropTypes.string.isRequired,
+    seats: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    transmission: PropTypes.string.isRequired,
+    fuel: PropTypes.string.isRequired,
+    agency: PropTypes.string.isRequired,
+  }).isRequired,
+  setFilters: PropTypes.func.isRequired,
+};

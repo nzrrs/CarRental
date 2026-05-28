@@ -1,5 +1,6 @@
 import { Bell, Search, Sun } from "lucide-react";
 import { FiMenu } from "react-icons/fi";
+import PropTypes from "prop-types";
 
 export default function AppBar(props) {
   return (
@@ -48,3 +49,8 @@ export default function AppBar(props) {
     </header>
   );
 }
+
+AppBar.propTypes = {
+  isSidebarOpen: PropTypes.bool.isRequired,
+  toggleSidebar: PropTypes.func.isRequired,
+};

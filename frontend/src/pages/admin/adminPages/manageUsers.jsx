@@ -4,6 +4,7 @@
 
 
 import { useMemo, useState } from "react";
+import PropTypes from "prop-types";
 import { utilisateurs } from "../../../data/data";
 import { twMerge as merge } from "tailwind-merge";
 import {
@@ -34,6 +35,10 @@ function Avatar({ name }) {
         </div>
     );
 }
+
+Avatar.propTypes = {
+    name: PropTypes.string,
+};
 
 function ClientBadge() {
     return (
@@ -206,3 +211,10 @@ function StatCard({ title, value, icon, color = "bg-sky-50" }) {
         </div>
     );
 }
+
+StatCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    icon: PropTypes.node.isRequired,
+    color: PropTypes.string,
+};

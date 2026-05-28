@@ -4,6 +4,7 @@
 
 
 import { useMemo, useState } from "react";
+import PropTypes from "prop-types";
 import { utilisateurs, vehicles, agences, reservations as reservationsData } from "../../../data/data";
 import { twMerge as merge } from "tailwind-merge";
 import { Eye, Edit, Search, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
@@ -29,6 +30,10 @@ function StatusBadge({ status }) {
     return <span className={merge("px-2 py-1 rounded-full text-xs font-medium", map[status] || map.Pending)}>{status}</span>;
 }
 
+StatusBadge.propTypes = {
+    status: PropTypes.string.isRequired,
+};
+
 function PaymentPill({ paid }) {
     return (
         <div className={merge("inline-flex items-center gap-2 px-2 py-1 rounded-full text-xs font-medium", paid ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-700")}>
@@ -38,6 +43,10 @@ function PaymentPill({ paid }) {
     );
 }
 
+PaymentPill.propTypes = {
+    paid: PropTypes.bool.isRequired,
+};
+
 function VehicleCell({ car }) {
     return (
         <div className="text-sm text-slate-700">
@@ -46,6 +55,16 @@ function VehicleCell({ car }) {
         </div>
     );
 }
+
+VehicleCell.propTypes = {
+    car: PropTypes.shape({
+        specs: PropTypes.shape({
+            brand: PropTypes.string,
+            model: PropTypes.string,
+            plateNumber: PropTypes.string,
+        }),
+    }),
+};
 
 export default function ManageReservations() {
     const [agencyFilter, setAgencyFilter] = useState("");

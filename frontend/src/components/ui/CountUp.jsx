@@ -1,8 +1,8 @@
 import { useInView, useMotionValue, useSpring } from "motion/react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 
-export default function CountUp({
+export function CountUp({
   to,
   from = 0,
   direction = "up",
@@ -92,16 +92,16 @@ export default function CountUp({
   return <span className={className} ref={ref} />;
 }
 
-propTypes.any = propTypes.oneOfType([propTypes.string, propTypes.number]);
+const numberLike = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
 
 CountUp.propTypes = {
-  to: propTypes.any.isRequired,
-  from: propTypes.any,
-  direction: propTypes.oneOf(["up", "down"]),
-  delay: propTypes.number,
-  duration: propTypes.number,
-  className: propTypes.string,
-  startWhen: propTypes.bool,
-  onStart: propTypes.func,
-  onEnd: propTypes.func,
+  to: numberLike.isRequired,
+  from: numberLike,
+  direction: PropTypes.oneOf(["up", "down"]),
+  delay: PropTypes.number,
+  duration: PropTypes.number,
+  className: PropTypes.string,
+  startWhen: PropTypes.bool,
+  onStart: PropTypes.func,
+  onEnd: PropTypes.func,
 };

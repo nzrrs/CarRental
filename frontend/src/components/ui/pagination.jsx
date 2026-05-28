@@ -1,4 +1,5 @@
 import * as React from "react"
+import PropTypes from "prop-types"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -118,4 +119,54 @@ export {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
+}
+
+Pagination.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
+}
+
+PaginationContent.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
+}
+
+PaginationItem.propTypes = {
+  children: PropTypes.node,
+}
+
+PaginationLink.propTypes = {
+  className: PropTypes.string,
+  isActive: PropTypes.bool,
+  size: PropTypes.oneOf([
+    "default",
+    "xs",
+    "sm",
+    "lg",
+    "icon",
+    "icon-xs",
+    "icon-sm",
+    "icon-lg",
+  ]),
+  onClick: PropTypes.func,
+  href: PropTypes.string,
+  children: PropTypes.node,
+}
+
+PaginationPrevious.propTypes = {
+  className: PropTypes.string,
+  text: PropTypes.string,
+  onClick: PropTypes.func,
+  href: PropTypes.string,
+}
+
+PaginationNext.propTypes = {
+  className: PropTypes.string,
+  text: PropTypes.string,
+  onClick: PropTypes.func,
+  href: PropTypes.string,
+}
+
+PaginationEllipsis.propTypes = {
+  className: PropTypes.string,
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import CountUp from "../../../components/ui/CountUp";
+import { CountUp } from "../../../components/ui/CountUp";
 import { useInView } from "motion/react";
 
 import counterImg from "../../../assets/images/counter_bg.png";

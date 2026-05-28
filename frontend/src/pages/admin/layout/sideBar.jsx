@@ -8,6 +8,7 @@ import {
   Settings,
   LogOut,
 } from "lucide-react";
+import PropTypes from "prop-types";
 
 export default function Sidebar({ isOpen }) {
   const navItems = [
@@ -86,3 +87,7 @@ export default function Sidebar({ isOpen }) {
     </aside>
   );
 }
+
+Sidebar.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+};

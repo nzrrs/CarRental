@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function VehicleFilters({
   statusFilter,
   setStatusFilter,
@@ -72,3 +74,20 @@ export default function VehicleFilters({
     </div>
   );
 }
+
+VehicleFilters.propTypes = {
+  statusFilter: PropTypes.string.isRequired,
+  setStatusFilter: PropTypes.func.isRequired,
+  validationFilter: PropTypes.string.isRequired,
+  setValidationFilter: PropTypes.func.isRequired,
+  agencyFilter: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  setAgencyFilter: PropTypes.func.isRequired,
+  searchQuery: PropTypes.string.isRequired,
+  setSearchQuery: PropTypes.func.isRequired,
+  agencies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      nom: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
