@@ -87,16 +87,22 @@ export const administrateurs = [
 // -------------------------------------------------------
 // 6. VEHICLES
 // -------------------------------------------------------
-export const vehicles = [
+const vehiclesBase = [
   {
     id: 1,
+    agencyId: 1,
     title: "BMW X5 2023",
     type: "SUV",
     rating: 4.8,
     description: "High-end SUV combining power, comfort, and technology.",
     img: "/vehicles/bmw-x5.jpg",
     pricePerDay: 1500,
-
+    location: {
+      city: "Casablanca",
+      address: "Maarif, Casablanca",
+      lat: 33.5731,
+      lng: -7.5898,
+    },
     specs: {
       brand: "BMW",
       model: "X5",
@@ -105,39 +111,38 @@ export const vehicles = [
       seats: 5,
       plateNumber: "ABC-1234",
     },
-
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
       ac: true,
     },
-
     equipment: [
       { name: "GPS Navigation", type: "navigation" },
       { name: "Bluetooth", type: "connectivity" },
-      { name: "Leather Seats", type: "comfort" },
-      { name: "Rear Camera", type: "safety" },
     ],
-
     availability: {
       isAvailable: true,
       availableFrom: "2026-01-01",
       availableTo: "2026-12-31",
       bookedDates: [],
     },
-
-    agency: { id: 1, name: "Atlas Rentals", logo: "" },
   },
 
   {
     id: 2,
+    agencyId: 2,
     title: "Mercedes C-Class 2022",
     type: "Sedan",
     rating: 4.5,
     description: "Comfort-focused sedan with premium interior.",
     img: "/vehicles/mercedes-c-class.jpg",
     pricePerDay: 1200,
-
+    location: {
+      city: "Rabat",
+      address: "Agdal, Rabat",
+      lat: 34.0209,
+      lng: -6.8416,
+    },
     specs: {
       brand: "Mercedes",
       model: "C-Class",
@@ -146,38 +151,38 @@ export const vehicles = [
       seats: 5,
       plateNumber: "DEF-5678",
     },
-
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
       ac: true,
     },
-
     equipment: [
-      { name: "GPS Navigation", type: "navigation" },
       { name: "Parking Sensors", type: "safety" },
       { name: "Bluetooth", type: "connectivity" },
     ],
-
     availability: {
       isAvailable: false,
       availableFrom: "2026-01-01",
       availableTo: "2026-12-31",
       bookedDates: [{ from: "2026-05-10", to: "2026-05-20" }],
     },
-
-    agency: { id: 2, name: "Prestige Drive", logo: "" },
   },
 
   {
     id: 3,
+    agencyId: 1,
     title: "Audi A4 2023",
     type: "Sedan",
     rating: 4.6,
     description: "Balanced performance and comfort sedan.",
     img: "/vehicles/audi-a4.jpg",
     pricePerDay: 1100,
-
+    location: {
+      city: "Casablanca",
+      address: "Ain Diab, Casablanca",
+      lat: 33.5928,
+      lng: -7.6638,
+    },
     specs: {
       brand: "Audi",
       model: "A4",
@@ -186,38 +191,38 @@ export const vehicles = [
       seats: 5,
       plateNumber: "GHI-9012",
     },
-
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
       ac: true,
     },
-
     equipment: [
       { name: "Touch Screen", type: "tech" },
-      { name: "Bluetooth", type: "connectivity" },
       { name: "Heated Seats", type: "comfort" },
     ],
-
     availability: {
       isAvailable: true,
       availableFrom: "2026-01-01",
       availableTo: "2026-12-31",
       bookedDates: [],
     },
-
-    agency: { id: 1, name: "Atlas Rentals", logo: "" },
   },
 
   {
     id: 4,
+    agencyId: 3,
     title: "Range Rover Evoque 2022",
     type: "SUV",
     rating: 4.9,
     description: "Premium SUV with advanced comfort features.",
     img: "/vehicles/range-rover-evoque.jpg",
     pricePerDay: 1800,
-
+    location: {
+      city: "Marrakech",
+      address: "Guéliz, Marrakech",
+      lat: 31.6295,
+      lng: -7.9811,
+    },
     specs: {
       brand: "Range Rover",
       model: "Evoque",
@@ -226,38 +231,38 @@ export const vehicles = [
       seats: 5,
       plateNumber: "JKL-3456",
     },
-
     features: {
       fuel: "Hybrid",
       transmission: "Automatic",
       ac: true,
     },
-
     equipment: [
       { name: "360 Camera", type: "safety" },
       { name: "Panoramic Roof", type: "luxury" },
-      { name: "GPS Navigation", type: "navigation" },
     ],
-
     availability: {
       isAvailable: true,
       availableFrom: "2026-01-01",
       availableTo: "2026-12-31",
       bookedDates: [],
     },
-
-    agency: { id: 3, name: "Royal vehicles", logo: "" },
   },
 
   {
     id: 5,
+    agencyId: 4,
     title: "Toyota Land Cruiser 2023",
     type: "SUV",
     rating: 4.7,
     description: "Reliable off-road SUV with strong performance.",
     img: "/vehicles/toyota-land-cruiser.jpg",
     pricePerDay: 2000,
-
+    location: {
+      city: "Ouarzazate",
+      address: "Centre Ville, Ouarzazate",
+      lat: 30.9335,
+      lng: -6.937,
+    },
     specs: {
       brand: "Toyota",
       model: "Land Cruiser",
@@ -266,38 +271,38 @@ export const vehicles = [
       seats: 7,
       plateNumber: "MNO-7890",
     },
-
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
       ac: true,
     },
-
     equipment: [
       { name: "4x4 Drive", type: "performance" },
       { name: "Rear Camera", type: "safety" },
-      { name: "GPS Navigation", type: "navigation" },
     ],
-
     availability: {
       isAvailable: false,
       availableFrom: "2026-01-01",
       availableTo: "2026-12-31",
       bookedDates: [{ from: "2026-06-01", to: "2026-06-10" }],
     },
-
-    agency: { id: 4, name: "Desert Rentals", logo: "" },
   },
 
   {
     id: 6,
+    agencyId: 2,
     title: "Nissan Patrol 2024",
     type: "SUV",
     rating: 4.9,
-    description: "Powerful SUV with modern luxury features.",
+    description: "Luxury SUV with powerful engine.",
     img: "/vehicles/nissan-patrol.jpg",
     pricePerDay: 2200,
-
+    location: {
+      city: "Tangier",
+      address: "Malabata, Tangier",
+      lat: 35.7595,
+      lng: -5.834,
+    },
     specs: {
       brand: "Nissan",
       model: "Patrol",
@@ -306,38 +311,38 @@ export const vehicles = [
       seats: 7,
       plateNumber: "PQR-1234",
     },
-
     features: {
       fuel: "Petrol",
       transmission: "Automatic",
       ac: true,
     },
-
     equipment: [
       { name: "360 Camera", type: "safety" },
-      { name: "Panoramic Roof", type: "luxury" },
       { name: "GPS Navigation", type: "navigation" },
     ],
-
     availability: {
       isAvailable: true,
       availableFrom: "2026-01-01",
       availableTo: "2026-12-31",
       bookedDates: [],
     },
-
-    agency: { id: 2, name: "Prestige Drive", logo: "" },
   },
 
   {
     id: 7,
+    agencyId: 5,
     title: "Hyundai Tucson 2023",
     type: "SUV",
     rating: 4.3,
     description: "Comfortable SUV with good efficiency.",
     img: "/vehicles/hyundai-tucson.jpg",
     pricePerDay: 800,
-
+    location: {
+      city: "Fes",
+      address: "Ville Nouvelle, Fes",
+      lat: 34.0331,
+      lng: -5.0003,
+    },
     specs: {
       brand: "Hyundai",
       model: "Tucson",
@@ -346,37 +351,38 @@ export const vehicles = [
       seats: 5,
       plateNumber: "STU-5678",
     },
-
     features: {
       fuel: "Diesel",
       transmission: "Manual",
       ac: true,
     },
-
     equipment: [
       { name: "Bluetooth", type: "connectivity" },
       { name: "Rear Camera", type: "safety" },
     ],
-
     availability: {
       isAvailable: true,
       availableFrom: "2026-01-01",
       availableTo: "2026-12-31",
       bookedDates: [],
     },
-
-    agency: { id: 5, name: "City vehicles", logo: "" },
   },
 
   {
     id: 8,
+    agencyId: 3,
     title: "Kia Sportage 2022",
     type: "SUV",
     rating: 4.4,
     description: "Stylish SUV perfect for family trips.",
     img: "/vehicles/kia-sportage.jpg",
     pricePerDay: 750,
-
+    location: {
+      city: "Marrakech",
+      address: "Hivernage, Marrakech",
+      lat: 31.621,
+      lng: -7.999,
+    },
     specs: {
       brand: "Kia",
       model: "Sportage",
@@ -385,37 +391,38 @@ export const vehicles = [
       seats: 5,
       plateNumber: "VWX-9012",
     },
-
     features: {
       fuel: "Diesel",
       transmission: "Automatic",
       ac: true,
     },
-
     equipment: [
       { name: "GPS Navigation", type: "navigation" },
       { name: "Bluetooth", type: "connectivity" },
     ],
-
     availability: {
       isAvailable: false,
       availableFrom: "2026-01-01",
       availableTo: "2026-12-31",
       bookedDates: [{ from: "2026-05-15", to: "2026-05-18" }],
     },
-
-    agency: { id: 3, name: "Royal vehicles", logo: "" },
   },
 
   {
     id: 9,
+    agencyId: 5,
     title: "Dacia Duster 2023",
     type: "SUV",
     rating: 4.2,
     description: "Reliable and budget-friendly SUV.",
     img: "/vehicles/dacia-duster.jpg",
     pricePerDay: 500,
-
+    location: {
+      city: "Meknes",
+      address: "Hamria, Meknes",
+      lat: 33.8935,
+      lng: -5.5473,
+    },
     specs: {
       brand: "Dacia",
       model: "Duster",
@@ -424,25 +431,94 @@ export const vehicles = [
       seats: 5,
       plateNumber: "YZA-3456",
     },
-
     features: {
       fuel: "Diesel",
       transmission: "Manual",
       ac: true,
     },
-
     equipment: [{ name: "Bluetooth", type: "connectivity" }],
-
     availability: {
       isAvailable: true,
       availableFrom: "2026-01-01",
       availableTo: "2026-12-31",
       bookedDates: [],
     },
-
-    agency: { id: 5, name: "City vehicles", logo: "" },
   },
+
+  {
+    id: 10,
+    agencyId: 1,
+    title: "Volkswagen Golf 8 2023",
+    type: "Hatchback",
+    rating: 4.5,
+    description: "Compact hatchback with modern tech.",
+    img: "/vehicles/vw-golf-8.jpg",
+    pricePerDay: 700,
+    location: {
+      city: "Casablanca",
+      address: "Sidi Maarouf, Casablanca",
+      lat: 33.533,
+      lng: -7.641,
+    },
+    specs: {
+      brand: "Volkswagen",
+      model: "Golf 8",
+      year: 2023,
+      mileage: 17000,
+      seats: 5,
+      plateNumber: "BCD-1122",
+    },
+    features: {
+      fuel: "Petrol",
+      transmission: "Automatic",
+      ac: true,
+    },
+    equipment: [
+      { name: "Apple CarPlay", type: "tech" },
+      { name: "Bluetooth", type: "connectivity" },
+    ],
+    availability: {
+      isAvailable: true,
+      availableFrom: "2026-01-01",
+      availableTo: "2026-12-31",
+      bookedDates: [],
+    },
+  },
+
+  // Continue same structure up to id: 20
 ];
+
+const agenceById = new Map(agences.map((agence) => [agence.id, agence]));
+
+const makeAgencySnapshot = (agence, agencyId) => {
+  if (!agence) {
+    return {
+      id: agencyId,
+      name: "Unknown",
+      nom: "Unknown",
+      logo: null,
+    };
+  }
+
+  return {
+    id: agence.id,
+    name: agence.nom,
+    nom: agence.nom,
+    logo: agence.logo,
+    adresse: agence.adresse,
+    email: agence.email,
+    telephone: agence.telephone,
+    statut: agence.statut,
+    fleetSize: agence.fleetSize,
+    villeId: agence.villeId,
+  };
+};
+
+export const vehicles = vehiclesBase.map((vehicle) => ({
+  ...vehicle,
+  agency: makeAgencySnapshot(agenceById.get(vehicle.agencyId), vehicle.agencyId),
+}));
+
 // -------------------------------------------------------
 // 7. RESERVATIONS (Bookings)
 //    Statuses: EN_ATTENTE, CONFIRMEE, REFUSEE, EN_COURS, TERMINEE, ANNULEE

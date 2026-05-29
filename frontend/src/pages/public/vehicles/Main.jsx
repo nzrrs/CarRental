@@ -37,19 +37,73 @@ function filterCars(cars, filters) {
   });
 }
 
-export default function Main({ filters, selectedSort, setSelectedSort, currentPage, setCurrentPage, setTotalPages }) {
+function normalizeText(value) {
+  return value?.toString().trim().toLowerCase() ?? "";
+}
+
+function isDateRangeOverlapping(start, end, bookedStart, bookedEnd) {
+  return start <= bookedEnd && end >= bookedStart;
+}
+
+function toLocalDate(dateString) {
+  return dateString ? new Date(`${dateString}T00:00:00`) : null;
+}
+
+function isCarAvailableForDates(availability, pickUpDate, returnDate) {
+  if (!pickUpDate || !returnDate) return true;
+  if (!availability?.isAvailable) return false;
+
+  const requestedStart = toLocalDate(pickUpDate);
+  const requestedEnd = toLocalDate(returnDate);
+
+  if (!requestedStart || !requestedEnd || requestedStart > requestedEnd) return false;
+
+  const availableFrom = toLocalDate(availability.availableFrom);
+  const availableTo = toLocalDate(availability.availableTo);
+
+  if (availableFrom && requestedStart < availableFrom) return false;
+  if (availableTo && requestedEnd > availableTo) return false;
+
+  return !(availability.bookedDates ?? []).some(({ from, to }) => {
+    const bookedStart = toLocalDate(from);
+    const bookedEnd = toLocalDate(to);
+
+    if (!bookedStart || !bookedEnd) return false;
+    return isDateRangeOverlapping(requestedStart, requestedEnd, bookedStart, bookedEnd);
+  });
+}
+
+function matchesLocation(car, pickUpLocation) {
+  const term = normalizeText(pickUpLocation);
+  if (!term || term === "choose a location") return true;
+
+  return [car.location?.city, car.location?.address].some((value) =>
+    normalizeText(value).includes(term),
+  );
+}
+
+function filterBySearch(cars, { pickUpLocation, pickUpDate, returnDate }) {
+  return cars.filter((car) => {
+    if (!matchesLocation(car, pickUpLocation)) return false;
+    if (!isCarAvailableForDates(car.availability, pickUpDate, returnDate)) return false;
+    return true;
+  });
+}
+
+export default function Main({ filters, pickUpLocation, pickUpDate, returnDate, selectedSort, setSelectedSort, currentPage, setCurrentPage, setTotalPages }) {
   const carsPerPage = 6;
   const listTopRef = useRef(null);
   const hasMountedRef = useRef(false);
 
   const filteredCars = filterCars(vehicles, filters);
-  const sortedCars = sortCars(filteredCars, selectedSort);
+  const searchFilteredCars = filterBySearch(filteredCars, { pickUpLocation, pickUpDate, returnDate });
+  const sortedCars = sortCars(searchFilteredCars, selectedSort);
   const totalPages = Math.ceil(sortedCars.length / carsPerPage);
 
   useEffect(() => {
     setCurrentPage(1);
     setTotalPages(totalPages);
-  }, [filters, selectedSort, totalPages, setCurrentPage, setTotalPages]);
+  }, [filters, pickUpLocation, pickUpDate, returnDate, selectedSort, totalPages, setCurrentPage, setTotalPages]);
 
   useEffect(() => {
     if (!hasMountedRef.current) {
@@ -95,6 +149,9 @@ Main.propTypes = {
     fuel: PropTypes.string.isRequired,
     agency: PropTypes.string.isRequired,
   }).isRequired,
+  pickUpLocation: PropTypes.string.isRequired,
+  pickUpDate: PropTypes.string.isRequired,
+  returnDate: PropTypes.string.isRequired,
   selectedSort: PropTypes.string.isRequired,
   setSelectedSort: PropTypes.func.isRequired,
   currentPage: PropTypes.number.isRequired,

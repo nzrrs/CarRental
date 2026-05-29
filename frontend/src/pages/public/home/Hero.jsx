@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import heroBg from "../../../assets/images/hero_section_bg.png";
+import { villes } from "../../../data/data";
 
 const openDatePicker = (e) => {
   e.target.showPicker?.();
@@ -15,23 +16,98 @@ export default function HomeHero() {
     pickupDate: "",
     returnDate: "",
   });
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const locationValue = formData.pickupLocation.trim();
+  const normalizedLocation = locationValue.toLowerCase();
+  const locationIsEmpty = !locationValue;
+  const matchingCity = locationIsEmpty
+    ? null
+    : villes.find((ville) => ville.nom.toLowerCase() === normalizedLocation);
+  const isLocationValid = locationIsEmpty || Boolean(matchingCity);
+  const locationQuery = locationIsEmpty ? "" : normalizedLocation;
+  const locationSuggestions = locationQuery
+    ? villes
+        .filter((ville) => ville.nom.toLowerCase().includes(locationQuery))
+        .slice(0, 6)
+    : [];
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!isLocationValid) {
+      setShowSuggestions(true);
+      return;
+    }
+
+    const finalPickupLocation = locationIsEmpty
+      ? ""
+      : matchingCity?.nom ?? formData.pickupLocation;
+    const finalFormData = { ...formData, pickupLocation: finalPickupLocation };
     // Turn formData into query params and navigate to /vehicles (object -> array(to filter out empty values) -> object -> query params)
     const filteredData = Object.fromEntries(
-      Object.entries(formData).filter(([, value]) => value !== ""),
+      Object.entries(finalFormData).filter(([, value]) => value !== ""),
     );
     const params = new URLSearchParams(filteredData);
-    navigate(`/vehicles?${params.toString()}`, { state: formData });
+    navigate(`/vehicles?${params.toString()}`, { state: finalFormData });
   };
 
   const handleChange = (e) => {
     const { id, value } = e.target;
+    setFormData((prev) => {
+      const next = { ...prev, [id]: value };
+
+      if (id === "pickupDate") {
+        if (!value) {
+          next.returnDate = "";
+        } else if (next.returnDate && next.returnDate < value) {
+          next.returnDate = value;
+        }
+      }
+
+      if (id === "returnDate" && prev.pickupDate && value < prev.pickupDate) {
+        next.returnDate = prev.pickupDate;
+      }
+
+      return next;
+    });
+  };
+
+  const handleLocationFocus = () => {
+    setShowSuggestions(true);
+  };
+
+  const handleLocationBlur = () => {
+    window.setTimeout(() => {
+      setShowSuggestions(false);
+    }, 120);
+  };
+
+  const handleLocationSelect = (value) => {
     setFormData((prev) => ({
       ...prev,
-      [id]: value,
+      pickupLocation: value,
     }));
+    setShowSuggestions(false);
+  };
+
+  const handleLocationKeyDown = (e) => {
+    const isEnter = e.key === "Enter";
+    const isTab = e.key === "Tab";
+
+    if (!isEnter && !isTab) return;
+
+    if (showSuggestions && locationSuggestions.length > 0) {
+      if (isEnter) {
+        e.preventDefault();
+      }
+      handleLocationSelect(locationSuggestions[0].nom);
+      return;
+    }
+
+    if (isEnter && !isLocationValid) {
+      e.preventDefault();
+      setShowSuggestions(true);
+    }
   };
 
   return (
@@ -76,6 +152,7 @@ export default function HomeHero() {
                 value={formData.carType}
                 onChange={handleChange}
                 className="block w-full rounded-xl bg-[#FAFAFA] py-3 px-3 outline-none appearance-none cursor-pointer placeholder:text-gray-400"
+                required
               >
                 <option value="" disabled>
                   Car type
@@ -118,9 +195,36 @@ export default function HomeHero() {
                 id="pickupLocation"
                 value={formData.pickupLocation}
                 onChange={handleChange}
+                onFocus={handleLocationFocus}
+                onBlur={handleLocationBlur}
+                onKeyDown={handleLocationKeyDown}
+                autoComplete="off"
+                aria-expanded={showSuggestions}
+                aria-controls="home-location-suggestions"
+                aria-invalid={!isLocationValid}
                 className="block w-full rounded-xl bg-[#FAFAFA] py-3 px-3 outline-none text-gray-900 placeholder:text-gray-400"
                 placeholder="Place of rental"
+                required
               />
+              {showSuggestions && locationSuggestions.length > 0 && (
+                <ul
+                  id="home-location-suggestions"
+                  role="listbox"
+                  className="absolute left-0 right-0 top-full z-20 mt-2 max-h-60 overflow-auto rounded-xl border border-gray-200 bg-white py-2 text-sm text-gray-800 shadow-lg"
+                >
+                  {locationSuggestions.map((ville) => (
+                    <li key={ville.id} role="option">
+                      <button
+                        type="button"
+                        onMouseDown={() => handleLocationSelect(ville.nom)}
+                        className="flex w-full items-center px-4 py-2.5 text-left transition-colors hover:bg-gray-50"
+                      >
+                        {ville.nom}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
               <svg
                 className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none text-gray-900"
                 fill="none"
@@ -164,6 +268,9 @@ export default function HomeHero() {
               onClick={openDatePicker}
               onFocus={openDatePicker}
               className="block w-full rounded-xl bg-[#FAFAFA] py-3 px-3 outline-none cursor-pointer text-gray-900"
+              min={formData.pickupDate || undefined}
+              disabled={!formData.pickupDate}
+              required
             />
           </div>
 
