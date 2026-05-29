@@ -77,7 +77,7 @@ export default function HomeHero() {
   };
 
   const handleLocationBlur = () => {
-    window.setTimeout(() => {
+    globalThis.setTimeout(() => {
       setShowSuggestions(false);
     }, 120);
   };

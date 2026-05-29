@@ -17,7 +17,7 @@ export default function Search({
   setReturnDate,
 }) {
   const [searchData, setSearchData] = useState({
-    location: pickUpLocation ?? "Choose a location",
+    location: pickUpLocation ?? "",
     pickupDate: pickUpDate ?? "",
     returnDate: returnDate ?? "",
   });
@@ -114,7 +114,7 @@ export default function Search({
 
   function handleClear() {  
     setSearchData({
-      location: "Choose a location",
+      location: "",
       pickupDate: "",
       returnDate: "",
     });
@@ -141,6 +141,7 @@ export default function Search({
             onFocus={handleLocationFocus}
             onBlur={handleLocationBlur}
             onKeyDown={handleLocationKeyDown}
+            placeholder="Choose a location"
             autoComplete="off"
             role="combobox"
             aria-expanded={showSuggestions}
@@ -261,7 +262,7 @@ export default function Search({
       <button
       onClick={handleClear}
       className="w-full bg-[#FF9E0C] py-2.5 text-base font-semibold text-white whitespace-nowrap md:ml-4 md:w-1/2 rounded-[10px]">
-        clear
+        Clear
       </button>
     </form>
   );
