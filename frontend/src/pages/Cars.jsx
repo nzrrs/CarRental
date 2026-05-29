@@ -24,6 +24,7 @@ const defaultFormState = {
   year: '2024',
   price: '',
   status: 'available',
+  imageUrl: '',
 };
 
 const defaultFilters = {
@@ -121,6 +122,7 @@ const Cars = () => {
       year: car.year,
       price: car.price,
       status: car.status,
+      imageUrl: car.imageUrl || '',
     });
     setIsModalOpen(true);
   };
@@ -158,6 +160,7 @@ const Cars = () => {
                 year: formData.year.trim(),
                 price: normalizedPrice,
                 status: formData.status,
+                imageUrl: formData.imageUrl,
               }
             : car
         );
@@ -172,6 +175,7 @@ const Cars = () => {
         year: formData.year.trim(),
         price: normalizedPrice,
         status: formData.status,
+        imageUrl: formData.imageUrl,
       };
 
       return [newCar, ...prevCars];
@@ -180,6 +184,19 @@ const Cars = () => {
     setIsModalOpen(false);
     setEditingCarId(null);
     setFormData(defaultFormState);
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files && event.target.files[0];
+    if (!file) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setFormData((prev) => ({ ...prev, imageUrl: String(reader.result || '') }));
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleFilterChange = (event) => {
@@ -282,6 +299,8 @@ const Cars = () => {
 
             <form onSubmit={handleAddCar} style={{ marginTop: '20px', display: 'grid', gap: '12px' }}>
               <div className="filter-group">
+                <label htmlFor="carImage">Car image</label>
+                <input id="carImage" type="file" accept="image/*" onChange={handleImageChange} />
                 <label htmlFor="carName">Car Name</label>
                 <input
                   id="carName"
@@ -420,7 +439,14 @@ const Cars = () => {
         {filteredCars.map((car) => (
           <div className="table-row" key={car.id}>
             <div className="car-cell">
-              <div className="car-thumb" />
+              <div
+                className="car-thumb"
+                style={
+                  car.imageUrl
+                    ? { backgroundImage: `url(${car.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+                    : undefined
+                }
+              />
               <div className="car-meta">
                 <span>{car.name}</span>
                 <small>{car.type}</small>
