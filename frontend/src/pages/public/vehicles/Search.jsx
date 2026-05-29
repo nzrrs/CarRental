@@ -9,7 +9,7 @@ const openDatePicker = (e) => {
 };
 
 export default function Search({
-  pickUpLocation = "Choose a location",
+  pickUpLocation = "",
   setPickUpLocation,
   pickUpDate,
   setPickUpDate,
@@ -25,7 +25,7 @@ export default function Search({
 
   const locationValue = searchData.location.trim();
   const normalizedLocation = locationValue.toLowerCase();
-  const locationIsEmpty = !locationValue || normalizedLocation === "choose a location";
+  const locationIsEmpty = !locationValue || normalizedLocation === "";
   const matchingCity = locationIsEmpty
     ? null
     : villes.find((ville) => ville.nom.toLowerCase() === normalizedLocation);
@@ -104,7 +104,7 @@ export default function Search({
     }
 
     const finalLocation = locationIsEmpty
-      ? "Choose a location"
+      ? ""
       : matchingCity?.nom ?? searchData.location;
 
     setPickUpLocation(finalLocation);

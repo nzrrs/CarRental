@@ -4,6 +4,7 @@ import NoFooterLayout from "../components/layout/NoFooterLayout";
 import HomePage from "../pages/public/home/Home";
 import VehiclesPage from "../pages/public/vehicles/Vehicles";
 import AboutPage from "../pages/public/about/About";
+import CarDetails from "../pages/public/details/CarDetails";
 
 import SignIn from "../pages/authentification/SignIn.jsx";
 import CreateAccount from "../pages/authentification/CreateAccount.jsx";
@@ -30,6 +31,7 @@ export default function PublicRoutes() {
       element: <NoFooterLayout />,
       children: [
         { index: true, element: <VehiclesPage /> },
+        { path: "car-details/:id", element: <CarDetails /> },
       ],
     },
     {

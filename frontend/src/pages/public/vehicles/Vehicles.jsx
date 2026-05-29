@@ -8,7 +8,7 @@ import PaginationBar from "../../../components/ui/PaginationBar";
 export default function Vehicles() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const initialPickUpLocation = params.get("pickupLocation") ?? location.state?.pickupLocation ?? "Choose a location";
+  const initialPickUpLocation = params.get("pickupLocation") ?? location.state?.pickupLocation ?? "";
   const initialPickUpDate = params.get("pickupDate") ?? location.state?.pickupDate ?? "";
   const initialReturnDate = params.get("returnDate") ?? location.state?.returnDate ?? "";
   const initialCarType = params.get("carType") ?? location.state?.carType ?? "all";
