@@ -33,6 +33,14 @@ function filterCars(cars, filters) {
     if (filters.transmission !== "all" && car.features.transmission.toLowerCase() !== filters.transmission) return false;
     if (filters.fuel !== "all" && car.features.fuel.toLowerCase() !== filters.fuel) return false;
     if (filters.agency !== "all" && car.agency.name.toLowerCase() !== filters.agency) return false;
+    if (
+      Array.isArray(filters.priceRange) &&
+      filters.priceRange.length === 2 &&
+      (car.pricePerDay < filters.priceRange[0] ||
+        car.pricePerDay > filters.priceRange[1])
+    ) {
+      return false;
+    }
     return true;
   });
 }
@@ -148,6 +156,7 @@ Main.propTypes = {
     transmission: PropTypes.string.isRequired,
     fuel: PropTypes.string.isRequired,
     agency: PropTypes.string.isRequired,
+    priceRange: PropTypes.arrayOf(PropTypes.number).isRequired,
   }).isRequired,
   pickUpLocation: PropTypes.string.isRequired,
   pickUpDate: PropTypes.string.isRequired,

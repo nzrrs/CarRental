@@ -4,6 +4,17 @@ import Main from "./Main";
 import Search from "./Search";
 import SideFilter from "./SideFilter";
 import PaginationBar from "../../../components/ui/PaginationBar";
+import { vehicles } from "../../../data/data";
+
+const vehiclePrices = vehicles
+  .map((vehicle) => Number(vehicle.pricePerDay))
+  .filter((value) => Number.isFinite(value));
+const vehiclePriceBounds = vehiclePrices.length
+  ? {
+      min: Math.floor(Math.min(...vehiclePrices) / 50) * 50,
+      max: Math.ceil(Math.max(...vehiclePrices) / 50) * 50,
+    }
+  : { min: 0, max: 1000 };
 
 export default function Vehicles() {
   const location = useLocation();
@@ -12,13 +23,15 @@ export default function Vehicles() {
   const initialPickUpDate = params.get("pickupDate") ?? location.state?.pickupDate ?? "";
   const initialReturnDate = params.get("returnDate") ?? location.state?.returnDate ?? "";
   const initialCarType = params.get("carType") ?? location.state?.carType ?? "all";
+  const initialAgency = params.get("agency") ?? location.state?.agency ?? "all";
 
   const [filters, setFilters] = useState({
     carType: initialCarType,
     seats: "all",
     transmission: "all",
     fuel: "all",
-    agency: "all",
+    agency: initialAgency,
+    priceRange: [vehiclePriceBounds.min, vehiclePriceBounds.max],
   });
 
   const [selectedSort, setSelectedSort] = useState("year_desc");
@@ -39,7 +52,11 @@ export default function Vehicles() {
         setReturnDate={setReturnDate}
       />
       <div className="flex flex-col md:flex-row gap-5 items-start pb-5">
-        <SideFilter filters={filters} setFilters={setFilters} />
+        <SideFilter
+          filters={filters}
+          setFilters={setFilters}
+          priceBounds={vehiclePriceBounds}
+        />
         <Main
           filters={filters}
           pickUpLocation={pickUpLocation}

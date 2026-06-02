@@ -3,6 +3,8 @@ import NoFooterLayout from "../components/layout/NoFooterLayout";
 
 import HomePage from "../pages/public/home/Home";
 import VehiclesPage from "../pages/public/vehicles/Vehicles";
+import ContactPage from "../pages/public/contact/Contact";
+import AgenciesPage from "../pages/public/agencies/Agencies";
 import AboutPage from "../pages/public/about/About";
 import CarDetails from "../pages/public/details/CarDetails";
 
@@ -24,6 +26,7 @@ export default function PublicRoutes() {
       children: [
         { index: true, element: <HomePage /> },
         { path: "about", element: <AboutPage /> },
+        { path: "contact", element: <ContactPage /> },
       ],
     },
     {
@@ -57,7 +60,12 @@ export default function PublicRoutes() {
    {
      path: "/agency/forgot-password",
      element: <AgencyForgotPassworda />,
-   }
+   },
+   {
+      path: "/agencies",
+      element: <NoFooterLayout />,
+      children: [{ index: true, element: <AgenciesPage /> }],
+    },
   ]);
 
   return <RouterProvider router={router} />;

@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import PriceSlider from "../../../components/ui/PriceSlider";
+import { agences } from "../../../data/data";
 const carTypeOptions = [
   { value: "all", label: "All" },
   { value: "sedan", label: "Sedan" },
@@ -31,11 +33,12 @@ const fuelOptions = [
   { value: "electric", label: "Electric" },
 ];
 
-const agencyOptions = [
-  { value: "atlas rentals", label: "Atlas Rentals" },
-  { value: "prestige drive", label: "Prestige Drive" },
-  { value: "royal vehicles", label: "Royal Vehicles" },
-];
+const agencyOptions = agences
+  .map((agency) => ({
+    value: agency.nom.toLowerCase(),
+    label: agency.nom,
+  }))
+  .sort((a, b) => a.label.localeCompare(b.label));
 
 function FilterSection({ title, children, defaultOpen = true, sectionId }) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -139,9 +142,9 @@ function SelectField({ value, onChange, options }) {
   );
 }
 
-export default function SideFilter({ filters, setFilters }) {
+export default function SideFilter({ filters, setFilters, priceBounds }) {
   return (
-    <form className="w-full shrink-0 rounded-[10px] border border-gray-200 bg-white shadow md:w-70">
+    <form className="flex w-full shrink-0 flex-col rounded-[10px] border border-gray-200 bg-white shadow md:w-70 sticky top-24 self-start max-h-[calc(100vh-6rem)]">
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-200 p-4">
         <p className="text-lg font-bold text-gray-900 sm:text-xl">Filters</p>
 
@@ -155,6 +158,7 @@ export default function SideFilter({ filters, setFilters }) {
               transmission: "all",
               fuel: "all",
               agency: "all",
+              priceRange: [priceBounds.min, priceBounds.max],
             })
           }
         >
@@ -162,58 +166,68 @@ export default function SideFilter({ filters, setFilters }) {
         </button>
       </div>
 
-      {/* Car type */}
-      <FilterSection title="Car type">
-        <CheckboxGroup
-          name="car-type"
-          options={carTypeOptions}
-          selected={filters.carType}
-          onChange={(v) => setFilters({ ...filters, carType: v })}
-        />
-      </FilterSection>
+      <div className="flex-1 overflow-y-auto">
+        {/* Car type */}
+        <FilterSection title="Car type">
+          <CheckboxGroup
+            name="car-type"
+            options={carTypeOptions}
+            selected={filters.carType}
+            onChange={(v) => setFilters({ ...filters, carType: v })}
+          />
+        </FilterSection>
 
-      {/* Seats */}
-      <FilterSection title="Seats">
-        <CheckboxGroup
-          name="seats"
-          options={seatOptions}
-          selected={filters.seats}
-          onChange={(v) => setFilters({ ...filters, seats: v })}
-        />
-      </FilterSection>
+        {/* Price */}
+        <FilterSection title="Price per day" sectionId="vehicle-price-label">
+          <PriceSlider
+            labelId="vehicle-price-label"
+            min={priceBounds.min}
+            max={priceBounds.max}
+            value={filters.priceRange}
+            onValueChange={(value) =>
+              setFilters({ ...filters, priceRange: value })
+            }
+          />
+        </FilterSection>
+        {/* Seats */}
+        <FilterSection title="Seats">
+          <CheckboxGroup
+            name="seats"
+            options={seatOptions}
+            selected={filters.seats}
+            onChange={(v) => setFilters({ ...filters, seats: v })}
+          />
+        </FilterSection>
 
-      {/* Transmission */}
-      <FilterSection title="Transmission">
-        <CheckboxGroup
-          name="transmission"
-          options={transmissionOptions}
-          selected={filters.transmission}
-          onChange={(v) =>
-            setFilters({ ...filters, transmission: v })
-          }
-        />
-      </FilterSection>
+        {/* Transmission */}
+        <FilterSection title="Transmission">
+          <CheckboxGroup
+            name="transmission"
+            options={transmissionOptions}
+            selected={filters.transmission}
+            onChange={(v) => setFilters({ ...filters, transmission: v })}
+          />
+        </FilterSection>
 
-      {/* Fuel */}
-      <FilterSection title="Fuel type">
-        <CheckboxGroup
-          name="fuel"
-          options={fuelOptions}
-          selected={filters.fuel}
-          onChange={(v) => setFilters({ ...filters, fuel: v })}
-        />
-      </FilterSection>
+        {/* Fuel */}
+        <FilterSection title="Fuel type">
+          <CheckboxGroup
+            name="fuel"
+            options={fuelOptions}
+            selected={filters.fuel}
+            onChange={(v) => setFilters({ ...filters, fuel: v })}
+          />
+        </FilterSection>
 
-      {/* Agency */}
-      <FilterSection title="Agency">
-        <SelectField
-          value={filters.agency}
-          options={agencyOptions}
-          onChange={(e) =>
-            setFilters({ ...filters, agency: e.target.value })
-          }
-        />
-      </FilterSection>
+        {/* Agency */}
+        <FilterSection title="Agency">
+          <SelectField
+            value={filters.agency}
+            options={agencyOptions}
+            onChange={(e) => setFilters({ ...filters, agency: e.target.value })}
+          />
+        </FilterSection>
+      </div>
     </form>
   );
 }
@@ -231,9 +245,10 @@ CheckboxGroup.propTypes = {
     PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
-  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
@@ -244,7 +259,7 @@ SelectField.propTypes = {
     PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
 };
 
@@ -255,6 +270,11 @@ SideFilter.propTypes = {
     transmission: PropTypes.string.isRequired,
     fuel: PropTypes.string.isRequired,
     agency: PropTypes.string.isRequired,
+    priceRange: PropTypes.arrayOf(PropTypes.number).isRequired,
   }).isRequired,
   setFilters: PropTypes.func.isRequired,
+  priceBounds: PropTypes.shape({
+    min: PropTypes.number.isRequired,
+    max: PropTypes.number.isRequired,
+  }).isRequired,
 };

@@ -1,8 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FaCogs, FaGasPump, FaRegHeart, FaSnowflake, FaStar, FaUsers } from "react-icons/fa";
+import {
+  FaCogs,
+  FaGasPump,
+  FaRegHeart,
+  FaSnowflake,
+  FaStar,
+  FaUsers,
+} from "react-icons/fa";
 
-export default function AboutCar({ vehicle }) {
+export default function AboutCar({ vehicle, setIsModalOpen }) {
   if (!vehicle) {
     return null;
   }
@@ -10,7 +17,6 @@ export default function AboutCar({ vehicle }) {
   const rating = Number(vehicle.rating || 0);
   const roundedRating = Math.round(rating);
   const isAvailable = vehicle?.availability?.isAvailable;
-  const contactEmail = vehicle?.agency?.email || "info@carrental.ma";
 
   const quickFeatures = [
     {
@@ -18,7 +24,9 @@ export default function AboutCar({ vehicle }) {
       icon: FaUsers,
     },
     {
-      label: vehicle.features?.transmission ? `${vehicle.features.transmission} Transmission` : "Transmission",
+      label: vehicle.features?.transmission
+        ? `${vehicle.features.transmission} Transmission`
+        : "Transmission",
       icon: FaCogs,
     },
     {
@@ -34,7 +42,9 @@ export default function AboutCar({ vehicle }) {
   return (
     <div className="h-full rounded-[20px] bg-white">
       <div className="flex h-full flex-col rounded-[16px]  p-4 shadow-sm sm:p-5">
-        <h2 className="text-2xl font-semibold text-[#1F1F1F]">{vehicle.title}</h2>
+        <h2 className="text-2xl font-semibold text-[#1F1F1F]">
+          {vehicle.title}
+        </h2>
 
         <div className="mt-4 flex items-center gap-2 text-sm text-[#4F4F4F]">
           <div className="flex items-center gap-1 text-[#FFB400]">
@@ -45,7 +55,9 @@ export default function AboutCar({ vehicle }) {
               />
             ))}
           </div>
-          <span className="font-medium text-[#1F1F1F]">{rating.toFixed(1)}</span>
+          <span className="font-medium text-[#1F1F1F]">
+            {rating.toFixed(1)}
+          </span>
         </div>
 
         <div className="mt-6 flex items-center justify-between">
@@ -57,14 +69,18 @@ export default function AboutCar({ vehicle }) {
           </div>
           <span
             className={`rounded-full px-3 py-1 text-sm font-medium ${
-              isAvailable ? "bg-[#E6F6ED] text-[#1F8B4C]" : "bg-[#FDECEC] text-[#D64545]"
+              isAvailable
+                ? "bg-[#E6F6ED] text-[#1F8B4C]"
+                : "bg-[#FDECEC] text-[#D64545]"
             }`}
           >
             {isAvailable ? "Available" : "Not available"}
           </span>
         </div>
 
-        <p className="mt-6 text-sm text-[#4F4F4F] leading-relaxed">{vehicle.description}</p>
+        <p className="mt-6 text-sm text-[#4F4F4F] leading-relaxed">
+          {vehicle.description}
+        </p>
 
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
           {quickFeatures.map((feature) => (
@@ -79,12 +95,12 @@ export default function AboutCar({ vehicle }) {
         </div>
 
         <div className="mt-6 flex flex-col gap-3">
-          <a
-            href={`mailto:${contactEmail}`}
+          <button
+            onClick={() => setIsModalOpen(true)}
             className="flex w-full items-center justify-center rounded-[5px] bg-[#2460af] py-3 text-sm font-semibold text-white hover:bg-[#3c7ad0]"
           >
             Contact agency
-          </a>
+          </button>
           <button
             type="button"
             className="flex w-full items-center justify-center gap-2 rounded-[5px] border border-black bg-white py-3 text-sm font-semibold text-black hover:bg-black/5"
@@ -119,8 +135,10 @@ AboutCar.propTypes = {
       email: PropTypes.string,
     }),
   }),
+  setIsModalOpen: PropTypes.func,
 };
 
 AboutCar.defaultProps = {
   vehicle: null,
+  setIsModalOpen: () => {},
 };
