@@ -5,6 +5,10 @@ import HomePage from "../pages/public/home/Home";
 import VehiclesPage from "../pages/public/vehicles/Vehicles";
 import AboutPage from "../pages/public/about/About";
 
+import SignIn from "../authentification/SignIn.jsx";
+import CreateAccount from "../authentification/CreateAccount.jsx";
+import ForgotPassword from "../authentification/ForgotPassword.jsx";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 export default function PublicRoutes() {
@@ -23,6 +27,18 @@ export default function PublicRoutes() {
       children: [
         { index: true, element: <VehiclesPage /> },
       ],
+    },
+    {
+      path: "/login",
+      element: <SignIn />,
+    },
+    {
+      path: "/register",
+      element: <CreateAccount />,
+    },
+    {
+      path: "/forgot-password",
+      element: <ForgotPassword />,
     },
   ]);
 
