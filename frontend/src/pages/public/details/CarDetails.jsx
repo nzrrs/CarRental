@@ -54,7 +54,7 @@ export default function CarDetails() {
 
           {/* modal box */}
           <div className="relative z-10" onClick={(e) => e.stopPropagation()}>
-            <Modal />
+            <Modal vehicle={vehicle} onClose={() => setIsModalOpen(false)} />
           </div>
         </div>
       )}
