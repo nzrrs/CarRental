@@ -126,7 +126,7 @@ function SelectField({ value, onChange, options }) {
 
       <svg
         aria-hidden="true"
-        className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+        className="pointer-evenCheckboxGroupts-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 20 20"
@@ -184,7 +184,7 @@ export default function SideFilter({ filters, setFilters, priceBounds }) {
             min={priceBounds.min}
             max={priceBounds.max}
             value={filters.priceRange}
-            onValueChange={(value) =>
+            onValueChange={(value) => 
               setFilters({ ...filters, priceRange: value })
             }
           />
