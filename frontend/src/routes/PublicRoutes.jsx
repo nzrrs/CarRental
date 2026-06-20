@@ -7,6 +7,7 @@ import ContactPage from "../pages/public/contact/Contact";
 import AgenciesPage from "../pages/public/agencies/Agencies";
 import AboutPage from "../pages/public/about/About";
 import CarDetails from "../pages/public/details/CarDetails";
+import AgencyDetails from "@/pages/public/agencies/AgencyDetails";
 
 import SignIn from "../pages/authentification/SignIn.jsx";
 import CreateAccount from "../pages/authentification/CreateAccount.jsx";
@@ -64,7 +65,7 @@ export default function PublicRoutes() {
    {
       path: "/agencies",
       element: <NoFooterLayout />,
-      children: [{ index: true, element: <AgenciesPage /> }],
+      children: [{ index: true, element: <AgenciesPage /> },{path :"/agencies/:id", element: <AgencyDetails />}],
     },
   ]);
 

@@ -1,6 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaRegClock, FaStar } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaRegClock,
+  FaStar,
+} from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+import VehicleFilters from "@/pages/admin/adminPages/components/VehicleFilters";
 
 export default function AboutAgency({ vehicle }) {
   if (!vehicle?.agency) {
@@ -21,11 +29,18 @@ export default function AboutAgency({ vehicle }) {
           className="h-24 w-24 rounded-full object-cover"
         />
         <div>
-          <p className="text-lg font-semibold text-black">{vehicle.agency.name}</p>
+          <p className="text-lg font-semibold text-black">
+            {vehicle.agency.name}
+          </p>
           <div className="mt-1 flex items-center gap-2 text-sm text-[#4F4F4F]">
             <div className="flex items-center gap-1 text-[#FFB400]">
               {Array.from({ length: 5 }, (_, i) => i + 1).map((star) => (
-                <FaStar key={star} className={star <= roundedRating ? "opacity-100" : "opacity-30"} />
+                <FaStar
+                  key={star}
+                  className={
+                    star <= roundedRating ? "opacity-100" : "opacity-30"
+                  }
+                />
               ))}
             </div>
             <span className="font-medium text-black">{rating.toFixed(1)}</span>
@@ -54,12 +69,14 @@ export default function AboutAgency({ vehicle }) {
         </div>
       </div>
 
-      <button
-        type="button"
-        className="mt-6 w-full rounded-[5px] border border-black py-3 text-sm font-semibold text-black hover:bg-black/5"
-      >
-        View agency profile
-      </button>
+      <NavLink to={`/agencies/${vehicle.agencyId}`}>
+        <button
+          type="button"
+          className="mt-6 w-full rounded-[5px] border border-black py-3 text-sm font-semibold text-black hover:bg-black/5"
+        >
+          View agency profile
+        </button>
+      </NavLink>
     </div>
   );
 }
