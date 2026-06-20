@@ -16,7 +16,7 @@ const Asideagency = ({ onNavigate }) => {
         </div>
         <nav className="nav">
           <NavLink
-            to="/"
+            to="/agency"
             end
             onClick={onNavigate}
             className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
@@ -26,7 +26,7 @@ const Asideagency = ({ onNavigate }) => {
             Dashboard
           </NavLink>
           <NavLink
-            to="/cars"
+            to="/agencyCars"
             onClick={onNavigate}
             className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
           >
@@ -35,7 +35,7 @@ const Asideagency = ({ onNavigate }) => {
             Cars
           </NavLink>
           <NavLink
-            to="/reservations"
+            to="/agencyReservations"
             onClick={onNavigate}
             className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
           >
@@ -45,13 +45,20 @@ const Asideagency = ({ onNavigate }) => {
           </NavLink>
          
         </nav>
+
         <div className="sidebar-footer">
+              <NavLink
+            to="/agencyProfil"
+            onClick={onNavigate}
+            className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+          >
           <div className="nav-link muted">
             <span className="nav-dot" />
             <img src={profilImg} alt="profil" />
             Agency Profile
           </div>
-          <div className="nav-link logout">
+          </NavLink>
+          <div className="nav-link logout" onClick={()=>{confirm("are you sure ?")}} >
             <span className="nav-dot" />
             <img src={logoutImg} alt="logout" />
             Logout
