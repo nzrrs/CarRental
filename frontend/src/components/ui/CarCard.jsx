@@ -101,7 +101,7 @@ export default function CarCard({ vehicle }) {
       {/* BUTTONS */}
       <div className="mt-2 flex w-full flex-col gap-3 sm:flex-row">
         <NavLink
-          to={`/vehicles/${id ?? "invalid"}/reservation`}
+          to={``}
           className="flex-1 bg-[#5937E0] text-white py-2.5 rounded-lg hover:opacity-90 transition text-center"
         >
           Book Now
