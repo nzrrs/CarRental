@@ -213,13 +213,11 @@ export default function Contact() {
 
             <DateField
               id="rentalDate"
-              label="Rental date"
               value={formData.rentalDate}
               onChange={handleChange}
             />
             <DateField
               id="returnDate"
-              label="Return date"
               value={formData.returnDate}
               min={formData.rentalDate}
               onChange={handleChange}
@@ -234,7 +232,7 @@ export default function Contact() {
           </button>
         </form>
 
-        <div className="relative min-h-[420px] overflow-hidden rounded-[20px] bg-[#111827] lg:min-h-[503px]">
+        <div className="relative min-h-105 overflow-hidden rounded-[20px] bg-[#111827] lg:min-h-125.75">
           <img
             src={heroBg}
             alt="Rental car ready for booking"
