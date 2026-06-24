@@ -42,7 +42,7 @@ export const agences = [
     email: "fastcar@mail.com",
     telephone: "0522000001",
     whatsapp: "0522000001",
-    statut: true,
+    statut: false,
     fleetSize: 45,
     logo: null,
     villeId: 1,

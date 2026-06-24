@@ -5,6 +5,7 @@ import stepsImg from "../../../assets/images/steps_img.png";
 import counterImg from "../../../assets/images/counter_bg.png";
 import vehicleImg from "../../../assets/images/vehicle_transparent.png";
 import { villes } from "../../../data/data";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 
 const carTypes = ["Sedan", "Cabriolet", "Pickup", "Minivan", "SUV"];
 
@@ -104,12 +105,12 @@ function DateField({ id, label, value, min, onChange }) {
 
 function PageHero() {
   return (
-    <section className="rounded-[40px] bg-[#FAFAFA] px-6 py-16 text-center sm:py-20">
+    <section className="rounded-[40px] bg-[#FAFAFA] px-6 py-16 text-center sm:py-20 flex justify-center flex-col items-center">
       <h1 className="font-[Work_Sans] text-4xl font-bold text-black sm:text-5xl">
         Contact Us
       </h1>
-      <p className="mt-5 text-lg text-black/60">
-        Home <span className="text-black">/ Contact Us</span>
+      <p className="mt-5">
+        <Breadcrumb/>
       </p>
     </section>
   );

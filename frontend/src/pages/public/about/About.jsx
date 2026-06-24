@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { Check, Play, ShieldCheck, Sparkles, Users } from "lucide-react";
+import Breadcrumb from "../../../components/ui/Breadcrumb";
+import FactsInNumbers from "../home/FactsInNumbers";
 import stepsImg from "../../../assets/images/steps_img.png";
 import counterImg from "../../../assets/images/counter_bg.png";
 import vehicleImg from "../../../assets/images/vehicle_transparent.png";
@@ -27,12 +29,6 @@ const values = [
   },
 ];
 
-const counters = [
-  { value: "20k+", label: "Happy customers" },
-  { value: "540+", label: "Count of cars" },
-  { value: "25+", label: "Years of experience" },
-];
-
 const checks = [
   "Verified agencies with clear vehicle details and availability.",
   "Flexible booking flow for rental dates, locations, and car type.",
@@ -42,13 +38,13 @@ const checks = [
 
 function PageHero() {
   return (
-    <section className="rounded-[40px] bg-[#FAFAFA] px-6 py-16 text-center sm:py-20">
+    <section className="rounded-[40px] bg-[#FAFAFA] px-6 py-16 text-center sm:py-20 flex justify-center flex-col items-center">
       <h1 className="font-[Work_Sans] text-4xl font-bold text-black sm:text-5xl">
         About Us
       </h1>
-      <p className="mt-5 text-lg text-black/60">
-        Home <span className="text-black">/ About Us</span>
-      </p>
+      <div className="mt-5">
+        <Breadcrumb />
+      </div>
     </section>
   );
 }
@@ -81,7 +77,7 @@ export default function AboutPage() {
         <img
           src={stepsImg}
           alt="Car rental customer experience"
-          className="h-[360px] w-full object-cover opacity-80 sm:h-[520px]"
+          className="h-90 w-full object-cover opacity-80 sm:h-130"
         />
         <button
           type="button"
@@ -92,17 +88,9 @@ export default function AboutPage() {
         </button>
       </section>
 
-      <section className="grid gap-8 py-16 text-center sm:grid-cols-3 lg:py-20">
-        {counters.map((counter) => (
-          <div key={counter.label}>
-            <p className="font-[Work_Sans] text-5xl font-bold text-[#5937E0] sm:text-6xl">
-              {counter.value}
-            </p>
-            <p className="mt-3 text-lg font-semibold text-black">
-              {counter.label}
-            </p>
-          </div>
-        ))}
+      {/* Using FactsInNumbers component which already has the CountUp functionality */}
+      <section className="py-16 lg:py-20">
+        <FactsInNumbers />
       </section>
 
       <section className="grid items-center gap-12 py-4 lg:grid-cols-[1fr_550px]">
@@ -134,7 +122,7 @@ export default function AboutPage() {
         <img
           src={counterImg}
           alt="Rental car on the road"
-          className="h-[420px] w-full rounded-[20px] object-cover"
+          className="h-105 w-full rounded-[20px] object-cover"
         />
       </section>
 
