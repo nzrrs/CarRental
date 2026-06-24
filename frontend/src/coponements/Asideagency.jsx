@@ -52,6 +52,7 @@ const Asideagency = ({ onNavigate }) => {
             onClick={onNavigate}
             className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
           >
+            
           <div className="nav-link muted">
             <span className="nav-dot" />
             <img src={profilImg} alt="profil" />
