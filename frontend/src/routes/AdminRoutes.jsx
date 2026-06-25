@@ -14,8 +14,8 @@ export default function AdminRoutes() {
 
     const router = createBrowserRouter([
         {
-            path: "/",
-            Component : AdminLayout ,
+            path: "/admin",
+            element : AdminLayout ,
             children:[
                 { index:true , element:<Dashboard />} ,
                 { path:"admin/dashboard" , element:<Dashboard />} ,
