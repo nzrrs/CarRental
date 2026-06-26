@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { CalendarDays, Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, Phone, User } from "lucide-react";
 import heroBg from "../../../assets/images/hero_section_bg.png";
 import stepsImg from "../../../assets/images/steps_img.png";
 import counterImg from "../../../assets/images/counter_bg.png";
 import vehicleImg from "../../../assets/images/vehicle_transparent.png";
-import { villes } from "../../../data/data";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-
-const carTypes = ["Sedan", "Cabriolet", "Pickup", "Minivan", "SUV"];
 
 const contactItems = [
   {
@@ -50,59 +47,6 @@ const posts = [
   },
 ];
 
-function SelectField({ id, label, value, onChange, children }) {
-  return (
-    <div className="relative">
-      <select
-        id={id}
-        value={value}
-        onChange={onChange}
-        className="h-11 w-full appearance-none rounded-xl bg-[#694BE3] px-4 pr-10 text-sm text-white outline-none placeholder:text-white/80"
-        required
-      >
-        {children}
-      </select>
-      <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-white/80">
-        <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
-          <path
-            d="M5 7.5L10 12.5L15 7.5"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </span>
-      <label htmlFor={id} className="sr-only">
-        {label}
-      </label>
-    </div>
-  );
-}
-
-function DateField({ id, label, value, min, onChange }) {
-  return (
-    <div className="relative">
-      <input
-        id={id}
-        type="date"
-        value={value}
-        min={min}
-        onChange={onChange}
-        onFocus={(event) => event.target.showPicker?.()}
-        className="h-11 w-full appearance-none rounded-xl bg-[#694BE3] px-4 pr-10 text-sm text-white outline-none"
-        required
-      />
-      {!value && (
-        <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-white">
-          {label}
-        </span>
-      )}
-      <CalendarDays className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/80" />
-    </div>
-  );
-}
-
 function PageHero() {
   return (
     <section className="rounded-[40px] bg-[#FAFAFA] px-6 py-16 text-center sm:py-20 flex justify-center flex-col items-center">
@@ -110,44 +54,48 @@ function PageHero() {
         Contact Us
       </h1>
       <p className="mt-5">
-        <Breadcrumb/>
+        <Breadcrumb />
       </p>
     </section>
   );
 }
 
+function InputField({ id, type = "text", placeholder, icon, value, onChange }) {
+  return (
+    <div className="relative">
+      <input
+        id={id}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        className="h-11 w-full rounded-xl bg-[#694BE3] px-4 pr-10 text-sm text-white outline-none placeholder:text-white/60"
+        required
+      />
+      <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-white/60">
+        {icon}
+      </span>
+    </div>
+  );
+}
+
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    carType: "",
-    rentalPlace: "",
-    returnPlace: "",
-    rentalDate: "",
-    returnDate: "",
+  const [personalData, setPersonalData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
   });
 
-  const handleChange = (event) => {
-    const { id, value } = event.target;
-    setFormData((prev) => {
-      const next = { ...prev, [id]: value };
-
-      if (id === "rentalDate") {
-        if (!value) {
-          next.returnDate = "";
-        } else if (next.returnDate && next.returnDate < value) {
-          next.returnDate = value;
-        }
-      }
-
-      if (id === "returnDate" && prev.rentalDate && value < prev.rentalDate) {
-        next.returnDate = prev.rentalDate;
-      }
-
-      return next;
-    });
+  const handlePersonalChange = (e) => {
+    const { id, value } = e.target;
+    setPersonalData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handlePersonalSubmit = (e) => {
+    e.preventDefault();
+    // handle submit
   };
 
   return (
@@ -156,80 +104,64 @@ export default function Contact() {
 
       <section className="grid gap-6 py-16 lg:grid-cols-[416px_1fr] lg:py-20">
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handlePersonalSubmit}
           className="flex flex-col gap-8 rounded-[20px] bg-[#5937E0] p-8 sm:p-10"
         >
           <h2 className="text-center font-[Work_Sans] text-3xl font-semibold text-white">
-            Book your car
+            Your information
           </h2>
 
           <div className="flex flex-col gap-5">
-            <SelectField
-              id="carType"
-              label="Car type"
-              value={formData.carType}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Car type
-              </option>
-              {carTypes.map((type) => (
-                <option key={type} value={type.toLowerCase()}>
-                  {type}
-                </option>
-              ))}
-            </SelectField>
-
-            <SelectField
-              id="rentalPlace"
-              label="Place of rental"
-              value={formData.rentalPlace}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Place of rental
-              </option>
-              {villes.slice(0, 12).map((ville) => (
-                <option key={ville.id} value={ville.nom}>
-                  {ville.nom}
-                </option>
-              ))}
-            </SelectField>
-
-            <SelectField
-              id="returnPlace"
-              label="Place of return"
-              value={formData.returnPlace}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Place of return
-              </option>
-              {villes.slice(0, 12).map((ville) => (
-                <option key={ville.id} value={ville.nom}>
-                  {ville.nom}
-                </option>
-              ))}
-            </SelectField>
-
-            <DateField
-              id="rentalDate"
-              value={formData.rentalDate}
-              onChange={handleChange}
+            <div className="grid grid-cols-2 gap-4">
+              <InputField
+                id="firstName"
+                placeholder="First name"
+                icon={<User className="h-4 w-4" />}
+                value={personalData.firstName}
+                onChange={handlePersonalChange}
+              />
+              <InputField
+                id="lastName"
+                placeholder="Last name"
+                icon={<User className="h-4 w-4" />}
+                value={personalData.lastName}
+                onChange={handlePersonalChange}
+              />
+            </div>
+            <InputField
+              id="email"
+              type="email"
+              placeholder="Email address"
+              icon={<Mail className="h-4 w-4" />}
+              value={personalData.email}
+              onChange={handlePersonalChange}
             />
-            <DateField
-              id="returnDate"
-              value={formData.returnDate}
-              min={formData.rentalDate}
-              onChange={handleChange}
+            <InputField
+              id="phone"
+              type="tel"
+              placeholder="Phone number"
+              icon={<Phone className="h-4 w-4" />}
+              value={personalData.phone}
+              onChange={handlePersonalChange}
             />
+            <div className="relative">
+              <textarea
+                id="message"
+                value={personalData.message}
+                onChange={handlePersonalChange}
+                placeholder="Your message"
+                rows={4}
+                className="w-full rounded-xl bg-[#694BE3] px-4 py-3 text-sm text-white outline-none placeholder:text-white/60 resize-none"
+                required
+              />
+            </div>
           </div>
 
           <button
             type="submit"
-            className="h-11 rounded-xl bg-[#FF9E0C] font-semibold text-white transition-colors hover:bg-[#e68f0a]"
+            className="h-11 rounded-xl bg-[#FF9E0C] font-semibold text-white hover:bg-[#e68f0a] transition-colors"
           >
-            Book now
+            Send message
           </button>
         </form>
 
