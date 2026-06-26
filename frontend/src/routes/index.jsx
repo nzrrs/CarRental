@@ -9,12 +9,17 @@ import ManageUsers from "../pages/admin/adminPages/manageUsers";
 import AdminLayout from "../pages/admin/layout/adminLayout";
 
 // Public
-import PublicLayout from "../components/layout/PublicLayout";
+import MainLayout from "@/components/layout/PublicLayout";
 import NoFooterLayout from "../components/layout/NoFooterLayout";
+import AgenciesPage from "../pages/public/agencies/Agencies";
+import AgencyDetails from "@/pages/public/agencies/AgencyDetails";
+import AboutPage from "@/pages/public/about/About";
+import ContactPage from "../pages/public/contact/Contact";
+
 
 import HomePage from "../pages/public/home/Home";
 import VehiclesPage from "../pages/public/vehicles/Vehicles";
-import AboutPage from "../pages/public/about/About";
+import CarDetails from "../pages/public/details/CarDetails";
 
 // Auth
 import SignIn from "../pages/authentification/SignIn.jsx";
@@ -52,10 +57,12 @@ const router = createBrowserRouter([
   // ================= PUBLIC =================
   {
     path: "/public",
-    element: <PublicLayout />,
+    element: <MainLayout />,
     children: [
       { index: true, element: <HomePage /> },
+      { path: "homePublic", element: <HomePage /> },
       { path: "about", element: <AboutPage /> },
+      { path: "contact", element: <ContactPage /> },
     ],
   },
 
@@ -64,6 +71,7 @@ const router = createBrowserRouter([
     element: <NoFooterLayout />,
     children: [
       { index: true, element: <VehiclesPage /> },
+      { path: "car-details/:id", element: <CarDetails /> },
     ],
   },
 
@@ -98,6 +106,11 @@ const router = createBrowserRouter([
     path: "/agency/forgot-password",
     element: <AgencyForgotPassword />,
   },
+  {
+      path: "/agencies",
+      element: <NoFooterLayout />,
+      children: [{ index: true, element: <AgenciesPage /> },{path :"/agencies/:id", element: <AgencyDetails />}],
+    },
 ]);
 
 export default router;

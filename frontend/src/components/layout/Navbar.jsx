@@ -6,11 +6,11 @@ import SupportIcon from "../../assets/images/phone_blue_icon.png";
 import Info from "../ui/ContactBlock.jsx";
 
 const NAV_LINKS = [
-  { label: "Home", to: "/" },
+  { label: "Home", to: "homePublic" },
   { label: "Vehicles", to: "/vehicles" },
   { label: "Agencies", to: "/agencies" },
-  { label: "About", to: "/about" },
-  { label: "Contact", to: "/contact" },
+  { label: "About", to: "about" },
+  { label: "Contact", to: "contact" },
 ];
 
 const NavLinkItem = ({
