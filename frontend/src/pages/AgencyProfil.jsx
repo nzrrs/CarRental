@@ -3,7 +3,7 @@ import React from 'react'
 const AgencyProfil = () => {
   return (
     <div>
-      yoyoy
+      profil agency will apears here 
     </div>
   )
 }
