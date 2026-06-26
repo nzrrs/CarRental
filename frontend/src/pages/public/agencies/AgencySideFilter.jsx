@@ -102,7 +102,7 @@ function MultiCheckboxGroup({ name, options, selected, onToggle }) {
 
 export default function AgencySideFilter({ filters, setFilters }) {
   return (
-    <form className="flex w-full shrink-0 flex-col rounded-[10px] border border-gray-200 bg-white shadow md:w-70 sticky top-24 self-start max-h-[calc(100vh-6rem)]">
+    <form className="flex w-full shrink-0 flex-col rounded-[10px] border border-gray-200 bg-white shadow md:w-70 sticky top-24 self-start max-h-auto">
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-200 p-4">
         <p className="text-lg font-bold text-gray-900 sm:text-xl">Filters</p>
         <button
