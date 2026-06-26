@@ -9,7 +9,6 @@ import {
   FaLock,
   FaUser,
   FaShieldAlt,
-  
 } from "react-icons/fa";
 import { IoCheckmark } from "react-icons/io5";
 
@@ -282,15 +281,15 @@ export default function Modal({ vehicle, onClose }) {
         {/* STEP 4 — success */}
         {step === 4 && (
           <div className="text-center py-2">
-           <div className="flex justify-center mb-5">
-  <div className="relative">
-    <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center">
-      <div className="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center shadow-lg shadow-green-500/30">
-        <IoCheckmark className="text-white text-4xl" />
-      </div>
-    </div>
-  </div>
-</div>
+            <div className="flex justify-center mb-5">
+              <div className="relative">
+                <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center shadow-lg shadow-green-500/30">
+                    <IoCheckmark className="text-white text-4xl" />
+                  </div>
+                </div>
+              </div>
+            </div>
             <p className="font-semibold text-lg mb-2">Message Sent!</p>
             <p className="text-sm text-gray-500 mb-5">
               {agency?.name} received your message and will contact you soon.
@@ -305,9 +304,12 @@ export default function Modal({ vehicle, onClose }) {
               <NavLink to="/register" className="text-xs text-gray-400 mb-2">
                 Create an account to track your inquiries.
               </NavLink>
-              <button className="w-full py-2.5 border border-green-500 text-green-600 rounded-xl text-sm font-medium hover:bg-green-50">
+              <NavLink
+                to="/register"
+                className="block w-full rounded-xl border border-green-500 py-2.5 text-center text-sm font-medium text-green-600 hover:bg-green-50"
+              >
                 Create Account
-              </button>
+              </NavLink>
             </div>
           </div>
         )}

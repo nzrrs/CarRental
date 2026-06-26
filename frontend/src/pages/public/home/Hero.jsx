@@ -41,14 +41,16 @@ export default function HomeHero() {
 
     const finalPickupLocation = locationIsEmpty
       ? ""
-      : matchingCity?.nom ?? formData.pickupLocation;
+      : (matchingCity?.nom ?? formData.pickupLocation);
     const finalFormData = { ...formData, pickupLocation: finalPickupLocation };
     // Turn formData into query params and navigate to /vehicles (object -> array(to filter out empty values) -> object -> query params)
     const filteredData = Object.fromEntries(
       Object.entries(finalFormData).filter(([, value]) => value !== ""),
     );
     const params = new URLSearchParams(filteredData);
-    navigate(`/vehicles?${params.toString()}`, { state: finalFormData });
+    navigate(`/public/vehicles?${params.toString()}`, {
+      state: finalFormData,
+    });
   };
 
   const handleChange = (e) => {
@@ -128,7 +130,7 @@ export default function HomeHero() {
             iste nisi?
           </p>
           <NavLink
-            to="/vehicles"
+            to="/public/vehicles"
             className="inline-flex items-center px-4 py-3 bg-[#FF9E0C] text-white font-medium w-fit text-sm sm:text-base lg:text-lg rounded-lg transition-colors duration-300 hover:bg-[#e68f0a]"
           >
             View All Cars

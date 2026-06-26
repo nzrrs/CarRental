@@ -6,11 +6,11 @@ import SupportIcon from "../../assets/images/phone_blue_icon.png";
 import Info from "../ui/ContactBlock.jsx";
 
 const NAV_LINKS = [
-  { label: "Home", to: "homePublic" },
-  { label: "Vehicles", to: "/vehicles" },
-  { label: "Agencies", to: "/agencies" },
-  { label: "About", to: "about" },
-  { label: "Contact", to: "contact" },
+  { label: "Home", to: "/public" },
+  { label: "Vehicles", to: "/public/vehicles" },
+  { label: "Agencies", to: "/public/agencies" },
+  { label: "About", to: "/public/about" },
+  { label: "Contact", to: "/public/contact" },
 ];
 
 const NavLinkItem = ({
@@ -53,7 +53,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-backdrop-filter:bg-white/90">
       <div className="container">
         <div className="flex items-center justify-between py-4">
-          <Link to="/">
+          <Link to="/public">
             <div className="flex shrink-0 items-center gap-2">
               <img
                 src={CarRentalLogo}
@@ -66,7 +66,7 @@ export default function Navbar() {
 
           <div className="hidden items-center gap-8 lg:flex">
             {NAV_LINKS.map(({ label, to }) => (
-              <NavLinkItem key={to} to={to} end={to === "/"}>
+              <NavLinkItem key={to} to={to} end={to === "/public"}>
                 {label}
               </NavLinkItem>
             ))}
@@ -127,9 +127,9 @@ export default function Navbar() {
                 <NavLinkItem
                   key={to}
                   to={to}
-                  end={to === "/"}
+                  end={to === "/public"}
                   onClick={closeMenu}
-                  className="rounded-md px-3 hover:px-6 py-2 hover:bg-gray-50 "
+                  className="rounded-md px-3 py-2 hover:bg-gray-50 hover:px-6"
                 >
                   {label}
                 </NavLinkItem>

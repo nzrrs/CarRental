@@ -38,7 +38,12 @@ export default function SimilarCars({ vehicle, vehicles }) {
     <div className="rounded-[20px] bg-white p-6 shadow-sm">
       <div className="flex items-center justify-between">
         <h3 className="text-xl font-semibold text-[#1F1F1F]">Similar cars</h3>
-        <NavLink to={"/vehicles"} className="text-sm font-medium text-blue-600 hover:text-blue-500">View all cars</NavLink>
+        <NavLink
+          to="/public/vehicles"
+          className="text-sm font-medium text-blue-600 hover:text-blue-500"
+        >
+          View all cars
+        </NavLink>
       </div>
 
       <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -52,7 +57,9 @@ export default function SimilarCars({ vehicle, vehicles }) {
               />
             </div>
             <div className="mt-4 flex items-center justify-between">
-              <p className="text-sm font-semibold text-[#1F1F1F]">{item.title}</p>
+              <p className="text-sm font-semibold text-[#1F1F1F]">
+                {item.title}
+              </p>
               <span className="flex items-center gap-1 text-xs text-[#4F4F4F]">
                 <FaStar className="text-[#FFB400]" />
                 {item.rating?.toFixed?.(1)}
@@ -64,7 +71,7 @@ export default function SimilarCars({ vehicle, vehicles }) {
                 {item.pricePerDay?.toLocaleString?.()} MAD/day
               </span>
               <NavLink
-                to={`/vehicles/car-details/${item.id}`}
+                to={`/public/vehicles/car-details/${item.id}`}
                 className="text-xs font-semibold text-[#2F80ED] hover:underline"
               >
                 View
@@ -94,7 +101,7 @@ SimilarCars.propTypes = {
       agency: PropTypes.shape({
         name: PropTypes.string,
       }),
-    })
+    }),
   ),
 };
 

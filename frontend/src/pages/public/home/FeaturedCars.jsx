@@ -2,8 +2,6 @@ import { NavLink } from "react-router-dom";
 import { vehicles } from "../../../data/data.js";
 import CarCard from "../../../components/ui/CarCard.jsx";
 
-
-
 function FeaturedCars() {
   return (
     // FEATURED CARS CONTAINER
@@ -23,12 +21,10 @@ function FeaturedCars() {
 
         {/* LINK TO ALL CARS */}
         <NavLink
-          to="/vehicles"
+          to="/public/vehicles"
           className="group inline-flex items-center gap-1 text-[#5937E0] font-medium w-fit text-sm sm:text-base lg:text-lg"
         >
-          <span className="group-hover:underline text-decoration-[#5937E0]">
-            View All Cars
-          </span>
+          <span className="group-hover:underline">View All Cars</span>
 
           <svg
             className="w-5 h-5"
@@ -48,10 +44,7 @@ function FeaturedCars() {
       {/* CARS CONTAINER */}
       <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9">
         {vehicles.slice(0, 6).map((vehicle) => (
-          <CarCard
-            key={vehicle.id}
-            vehicle={vehicle}
-          />
+          <CarCard key={vehicle.id} vehicle={vehicle} />
         ))}
       </div>
     </div>

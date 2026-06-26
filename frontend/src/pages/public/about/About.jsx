@@ -149,7 +149,7 @@ export default function AboutPage() {
               the right agency for your trip.
             </p>
             <NavLink
-              to="/vehicles"
+              to="/public/vehicles"
               className="mt-8 inline-flex rounded-xl bg-[#FF9E0C] px-7 py-3 font-semibold text-white transition-colors hover:bg-[#e68f0a]"
             >
               Book now

@@ -1,93 +1,132 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { vehicles, agences } from '../../data/data';
+import { Link, useLocation } from "react-router-dom";
+import { vehicles, agences } from "../../data/data";
 
-// Simple home icon using SVG
-const HomeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+const HomeIcon = ({ className = "" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={`mr-1 h-4 w-4 ${className}`}
+    viewBox="0 0 20 20"
+    fill="currentColor"
+  >
     <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
   </svg>
 );
 
-// Chevron separator icon
 const ChevronRightIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="mx-2 h-4 w-4 text-gray-400"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+  >
+    <path
+      fillRule="evenodd"
+      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+      clipRule="evenodd"
+    />
   </svg>
 );
 
-// Function to get vehicle name by ID
 const getVehicleName = (id) => {
-  const vehicle = vehicles.find(v => String(v.id) === String(id));
+  const vehicle = vehicles.find((v) => String(v.id) === id);
   return vehicle ? vehicle.title : `Car ${id}`;
 };
 
-// Function to get agency name by ID
 const getAgencyName = (id) => {
-  const agency = agences.find(a => String(a.id) === String(id));
+  const agency = agences.find((a) => String(a.id) === id);
   return agency ? agency.nom : `Agency ${id}`;
 };
 
 export default function Breadcrumb() {
-  const location = useLocation();
-  const pathnames = location.pathname.split('/').filter(x => x);
+  const { pathname } = useLocation();
 
-  // Don't show breadcrumb on home page
-  if (location.pathname === '/' || location.pathname === '/home') {
+  // Hide breadcrumb on home page
+  if (pathname === "/public" || pathname === "/public/") {
     return null;
   }
 
+  const pathnames = pathname
+    .split("/")
+    .filter((p) => p && p !== "public");
+
   const breadcrumbs = [
-    { name: 'Home', path: '/' },
-    ...pathnames.map((pathname, index) => {
-      let path = `/${pathnames.slice(0, index + 1).join('/')}`;
-      let name = pathname.charAt(0).toUpperCase() + pathname.slice(1);
-      
-      // Special handling for route names
-      if (name === 'Vehicles') name = 'Vehicles';
-      if (name === 'About') name = 'About Us';
-      if (name === 'Contact') name = 'Contact Us';
-      if (name === 'Agencies') name = 'Our Agencies';
-      if (name === 'Car-details'){ name = 'Car Details'; path = ""}
-      
-      // Special handling for dynamic routes
-      if (pathnames[index - 1] === 'car-details' && !isNaN(pathname)) {
-        name = getVehicleName(pathname);
-      } else if (pathnames[index - 1] === 'agencies' && !isNaN(pathname)) {
-        name = getAgencyName(pathname);
+    {
+      name: "Home",
+      path: "/public",
+    },
+    ...pathnames.map((segment, index) => {
+      let path = "/public/" + pathnames.slice(0, index + 1).join("/");
+
+      let name;
+
+      switch (segment) {
+        case "about":
+          name = "About Us";
+          break;
+
+        case "contact":
+          name = "Contact Us";
+          break;
+
+        case "vehicles":
+          name = "Vehicles";
+          break;
+
+        case "agencies":
+          name = "Our Agencies";
+          break;
+
+        case "car-details":
+          name = "Car Details";
+          path = ""; // prevent linking this breadcrumb
+          break;
+
+        default:
+          if (pathnames[index - 1] === "car-details") {
+            name = getVehicleName(segment);
+            path = "";
+          } else if (pathnames[index - 1] === "agencies") {
+            name = getAgencyName(segment);
+          } else {
+            name = segment.charAt(0).toUpperCase() + segment.slice(1);
+          }
       }
-      
+
       return { name, path };
-    })
+    }),
   ];
 
   return (
     <nav>
-      <ol className="flex items-center flex-wrap">
-        <li className="flex items-center">
-          <Link 
-            to="/" 
-            className="flex items-center text-blue-600 hover:text-blue-800 transition-colors font-medium"
-          >
-            <HomeIcon />
-            Home
-          </Link>
-          {breadcrumbs.length > 1 && <ChevronRightIcon />}
-        </li>
-        {breadcrumbs.slice(1).map((breadcrumb, index) => (
-          <li key={breadcrumb.path} className="flex items-center">
-            {index < breadcrumbs.length - 2 ? (
-              <>
-                <Link 
-                  to={breadcrumb.path} 
-                  className="text-gray-600 hover:text-blue-600 transition-colors"
-                >
-                  {breadcrumb.name}
-                </Link>
-                <ChevronRightIcon />
-              </>
+      <ol className="flex flex-wrap items-center">
+        {breadcrumbs.map((breadcrumb, index) => (
+          <li key={`${breadcrumb.path}-${index}`} className="flex items-center">
+            {index > 0 && <ChevronRightIcon />}
+
+            {index === breadcrumbs.length - 1 || !breadcrumb.path ? (
+              <span className="font-medium text-gray-900">
+                {breadcrumb.name}
+              </span>
             ) : (
-              <span className="text-gray-900 font-medium">{breadcrumb.name}</span>
+              <Link
+                to={breadcrumb.path}
+                className={`group flex items-center ${
+                  index === 0
+                    ? ""
+                    : "text-gray-600 transition-colors hover:text-blue-600"
+                }`}
+              >
+                {index === 0 ? (
+                  <>
+                    <HomeIcon className="text-blue-600" />
+                    <span className="text-blue-600 hover:underline">
+                      {breadcrumb.name}
+                    </span>
+                  </>
+                ) : (
+                  breadcrumb.name
+                )}
+              </Link>
             )}
           </li>
         ))}

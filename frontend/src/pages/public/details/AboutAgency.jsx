@@ -8,7 +8,6 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import VehicleFilters from "@/pages/admin/adminPages/components/VehicleFilters";
 
 export default function AboutAgency({ vehicle }) {
   if (!vehicle?.agency) {
@@ -69,7 +68,7 @@ export default function AboutAgency({ vehicle }) {
         </div>
       </div>
 
-      <NavLink to={`/agencies/${vehicle.agencyId}`}>
+      <NavLink to={`/public/agencies/${vehicle.agencyId}`}>
         <button
           type="button"
           className="mt-6 w-full rounded-[5px] border border-black py-3 text-sm font-semibold text-black hover:bg-black/5"

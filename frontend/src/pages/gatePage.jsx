@@ -42,7 +42,7 @@ export default function GatePage() {
   ];
 
     return(
-        <div className="min-h-screen bg-gradient-to-br from-purple-700 via-violet-600 to-purple-900 flex flex-col items-center justify-center px-4 py-12">
+        <div className="min-h-screen bg-linear-to-br from-purple-700 via-violet-600 to-purple-900 flex flex-col items-center justify-center px-4 py-12">
       {/* Header */}
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-6xl font-bold text-white">
@@ -69,13 +69,13 @@ export default function GatePage() {
               {item.title}
             </h2>
 
-            <p className="text-gray-600 text-center mt-4 flex-grow">
+            <p className="text-gray-600 text-center mt-4 grow">
               {item.description}
             </p>
 
             <Link
               to={item.route}
-              className="mt-8 bg-gradient-to-r from-purple-600 to-violet-700 text-white py-3 rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition"
+              className="mt-8 bg-linear-to-r from-purple-600 to-violet-700 text-white py-3 rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition"
             >
               Go to {item.title}
               <ArrowRight size={18} />

@@ -12,19 +12,19 @@ const SOCIAL_LINKS = [
 ];
 
 const QUICK_LINKS = [
-  { label: "Home", to: "/" },
-  { label: "Vehicles", to: "/vehicles" },
-  { label: "Agencies", to: "/agencies" },
-  { label: "About", to: "/about" },
-  { label: "Contact", to: "/contact" },
+  { label: "Home", to: "/public" },
+  { label: "Vehicles", to: "/public/vehicles" },
+  { label: "Agencies", to: "/public/agencies" },
+  { label: "About", to: "/public/about" },
+  { label: "Contact", to: "/public/contact" },
 ];
 
 const CAR_TYPES = ["Sedan", "Cabriolet", "Pickup", "Minivan", "SUV"];
 
 const CONTACT_INFO = [
-  { icon: "",title: "Address", subtitle: "Oxford Ave. Cary, NC 27511" },
-  { icon: "",title: "Email", subtitle: "nwiger@yahoo.com" },
-  { icon: "",title: "Phone", subtitle: "+537 547-6401" },
+  { icon: "", title: "Address", subtitle: "Oxford Ave. Cary, NC 27511" },
+  { icon: "", title: "Email", subtitle: "nwiger@yahoo.com" },
+  { icon: "", title: "Phone", subtitle: "+537 547-6401" },
 ];
 
 export default function Footer() {
@@ -123,16 +123,20 @@ export default function Footer() {
         </div>
 
         {/* FOOTER BOTTOM */}
-        <div className="flex flex-col items-center justify-between gap-3 border-t border-gray-100 pt-6 text-sm text-gray-500 md:flex-row">
-          <p>&copy; {currentYear} Car Rental. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <NavLink to="/about" className="transition-colors hover:text-blue-600">
-              About
-            </NavLink>
-            <NavLink to="/contact" className="transition-colors hover:text-blue-600">
-              Contact
-            </NavLink>
-          </div>
+        <div className="flex items-center gap-4">
+          <NavLink
+            to="/public/about"
+            className="transition-colors hover:text-blue-600"
+          >
+            About
+          </NavLink>
+
+          <NavLink
+            to="/public/contact"
+            className="transition-colors hover:text-blue-600"
+          >
+            Contact
+          </NavLink>
         </div>
       </div>
     </footer>

@@ -9,8 +9,7 @@ import vehicleImage from "../../assets/images/vehicle_transparent.png";
 import agencyIcon from "../../assets/icons/agency_icon.svg";
 
 export default function CarCard({ vehicle }) {
-  const { id, title, type, rating, pricePerDay, features, agency } =
-    vehicle;
+  const { id, title, type, rating, pricePerDay, features, agency } = vehicle;
   const agencyName = agency?.name;
   const agencyLogo = agency?.logo;
   const normalizedRating = Math.max(0, Math.min(5, Number(rating) || 0));
@@ -56,7 +55,7 @@ export default function CarCard({ vehicle }) {
 
             {/* AGENCY */}
             <NavLink
-              to={`/agencies/${agencyName ?? "unknown"}`}
+              to={`/public/agencies/${agency?.id}`}
               className="flex items-center gap-2 rounded-full border border-[#5937E026] bg-[#5937E014] px-3 py-1 transition hover:bg-[#5937E026]"
             >
               <img
@@ -101,14 +100,14 @@ export default function CarCard({ vehicle }) {
       {/* BUTTONS */}
       <div className="mt-2 flex w-full flex-col gap-3 sm:flex-row">
         <NavLink
-          to={``}
+          to={`/public/vehicles/car-details/${id}`}
           className="flex-1 bg-[#5937E0] text-white py-2.5 rounded-lg hover:opacity-90 transition text-center"
         >
           Book Now
         </NavLink>
 
         <NavLink
-          to={`/vehicles/car-details/${id}`}
+          to={`/public/vehicles/car-details/${id}`}
           className="flex-1 border border-gray-300 py-2.5 rounded-lg hover:bg-gray-100 transition text-center"
         >
           View Details
@@ -132,6 +131,7 @@ CarCard.propTypes = {
       ac: PropTypes.bool,
     }),
     agency: PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       name: PropTypes.string,
       logo: PropTypes.string,
     }),
