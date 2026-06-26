@@ -7,7 +7,6 @@ import { vehicles } from "../../data/data";
 export default function AgencyCard({ agency }) {
   const fleet = getAgencyVehicles(agency, vehicles);
   const image = getAgencyImage(agency);
-console.log(agency)
   return (
     <div className="flex w-full gap-5 rounded-[10px] border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md sm:p-5">
       <div className="h-28 w-28 shrink-0 overflow-hidden rounded-[10px] bg-gray-100 sm:h-36 sm:w-36">
