@@ -1,13 +1,19 @@
+
+import AdminRoutes from "./routes/AdminRoutes";
 import PublicRoutes from "./routes/PublicRoutes";
-import AdminRoutes from "./routes/AdminRoutes"
-import AuthRoutes from "./routes/Auth";
+import { BrowserRouter , Routes , Route } from "react-router-dom";
+import GatePage from "./pages/gatePage";
+export default function App() {
+ 
 
-function App() {
-  return (  
+  return (
+    <>
     
-    <PublicRoutes />
-    // <AdminRoutes />
-  )
-}
 
-export default App;
+    
+     
+    
+
+    </>
+  );
+}

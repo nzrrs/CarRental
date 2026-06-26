@@ -22,7 +22,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 export default function PublicRoutes() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/public",
       element: <PublicLayout />,
       children: [
         { index: true, element: <HomePage /> },
