@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { carAssets, defaultReservations } from '../agencyData'
+import { useState, useEffect } from 'react'
+import { carAssets, defaultReservations } from '../../../agencyData'
 import './reservation.css'
 
 const defaultFormState = {

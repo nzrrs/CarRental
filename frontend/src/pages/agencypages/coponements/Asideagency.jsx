@@ -1,15 +1,22 @@
 import React from 'react'
-import logo from '../assets/LOCAMAROC (1).png'
 import { NavLink } from 'react-router-dom'
-import dashboardImg from "../assets/dashboard (2).png";
-import checkingImg from "../assets/checking.png";
-import bookImg from "../assets/book.png";
-import profilImg from "../assets/profile.png"
-import logoutImg from "../assets/logout.png"
-
+import logo from "../../../assets/LOCAMAROC (1).png";
+import dashboardImg from "../../../assets/dashboard (2).png";
+import checkingImg from "../../../assets/checking.png";
+import bookImg from "../../../assets/book.png";
+import profilImg from "../../../assets/profile.png"
+import logoutImg from "../../../assets/logout.png"
 const Asideagency = ({ onNavigate }) => {
+  const getLogo = () => (
+    <div style={{ fontSize: '24px', fontWeight: 'bold', width: '40px', height: '40px', display: 'grid', placeItems: 'center', background: '#eef2ff', borderRadius: '8px', color: '#6366f1' }}>
+      CR
+    </div>
+  );
+
+ 
+
   return (
-       <aside className="sidebar" id="agency-sidebar">
+      <aside className="sidebar" id="agency-sidebar">
         <div className="brand">
           <img src={logo} alt="LOGO" />
           <span>CarRental</span>
@@ -62,7 +69,7 @@ const Asideagency = ({ onNavigate }) => {
             Logout
           </div>
         </div>
-      </aside>
+      </aside>  
   )
 }
 

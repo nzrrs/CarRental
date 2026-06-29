@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { defaultCars } from '../agencyData'
+import { useState } from 'react'
+import { defaultCars } from '../../../agencyData'
 import CarModal from '../coponements/cars/CarModal'
 import CarStatCard from '../coponements/cars/CarStatCard'
 import CarFilters from '../coponements/cars/CarFilters'

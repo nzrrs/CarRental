@@ -1,9 +1,8 @@
-import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Cars from '../../pages/Cars'
-import Dashboard from '../../pages/Dashboard'
-import Reservations from '../../pages/Reservations'
-import AgencyProfil from '../../pages/AgencyProfil'
+import Cars from '../../pages/agencypages/agenciespages/Cars'
+import Dashboard from '../../pages/agencypages/agenciespages/Dashboard'
+import Reservations from '../../pages/agencypages/agenciespages/Reservations'
+import AgencyProfil from '../../pages/agencypages/agenciespages/AgencyProfil'
 
 const RRoutesAG = () => {
   return (

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './agencyProfil.css'
-import { defaultAgencyData } from '../agencyData'
+import { defaultAgencyData } from '../../../agencyData'
 import ProfileHeader from '../coponements/agency/ProfileHeader'
 import ContactInfoCard from '../coponements/agency/ContactInfoCard'
 import SocialMediaCard from '../coponements/agency/SocialMediaCard'
