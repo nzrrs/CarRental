@@ -9,7 +9,7 @@ const RRoutesAG = () => {
   return (
      <Routes>
               <Route path="/agencyCars" element={<Cars />} />
-              <Route path="/agency" element={<Dashboard />} />
+              <Route path="/" element={<Dashboard />} />
               <Route path="/agencyReservations" element={<Reservations />} />
               <Route path="/agencyProfil" element={<AgencyProfil/>}/>
     </Routes>

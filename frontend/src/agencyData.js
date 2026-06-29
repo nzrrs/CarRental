@@ -106,3 +106,99 @@ export const defaultReservations = [
     status: 'Active'
   }
 ]
+
+export const defaultCars = [
+  {
+    id: 1,
+    name: 'Tesla Model 3',
+    type: 'Electric Sedan',
+    category: 'Sedan',
+    year: '2023',
+    price: '$89',
+    status: 'available',
+  },
+  {
+    id: 2,
+    name: 'BMW X5',
+    type: 'Luxury SUV',
+    category: 'SUV',
+    year: '2024',
+    price: '$129',
+    status: 'rented',
+  },
+  {
+    id: 3,
+    name: 'Porsche 911',
+    type: 'Sports Car',
+    category: 'Sports',
+    year: '2023',
+    price: '$299',
+    status: 'available',
+  },
+  {
+    id: 4,
+    name: 'Mercedes S-Class',
+    type: 'Luxury Sedan',
+    category: 'Luxury',
+    year: '2024',
+    price: '$199',
+    status: 'maintenance',
+  },
+  {
+    id: 5,
+    name: 'Audi A4',
+    type: 'Premium Sedan',
+    category: 'Sedan',
+    year: '2023',
+    price: '$79',
+    status: 'available',
+  },
+  {
+    id: 6,
+    name: 'Range Rover Sport',
+    type: 'Luxury SUV',
+    category: 'SUV',
+    year: '2024',
+    price: '$159',
+    status: 'rented',
+  },
+]
+
+export const defaultAgencyData = {
+
+  name: 'Morocco Car Rental',
+  email: 'info@moroccocarrental.com',
+  phone: '+212 6 12 34 56 78',
+  website: 'www.moroccocarrental.com',
+  address: '123 Boulevard Mohammed V',
+  city: 'Casablanca, Morocco',
+  workingHours: 'Mon - Sun: 08:00 AM - 08:00 PM',
+  coverImage: 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=1200&auto=format&fit=crop&q=80', // High quality coastal drive banner
+  logoImage: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=150&auto=format&fit=crop&q=80', // Emblem or clean car logo
+  socialMedia: {
+    facebook: 'facebook.com/moroccocarrental',
+    instagram: 'instagram.com/moroccocarrental',
+    linkedin: 'linkedin.com/company/moroccocarrental',
+    twitter: 'x.com/moroccocarrental'
+  },
+  documents: [
+    { id: 'doc-1', name: 'Business License', filename: 'license.pdf', type: 'license' },
+    { id: 'doc-2', name: 'Insurance Document', filename: 'insurance.pdf', type: 'insurance' },
+    { id: 'doc-3', name: 'CIN / Identity Card', filename: 'identity.pdf', type: 'id' }
+  ],
+  stats: {
+    totalCars: 45,
+    totalBookings: 120,
+    availableCars: 18,
+    totalCustomers: 80,
+    revenue: '$12,450',
+    monthlyGrowth: '+12%'
+  },
+  preferences: {
+    emailNotifications: true,
+    smsNotifications: true,
+    showPhonePublicly: true,
+    showEmailPublicly: true
+  }
+}
+

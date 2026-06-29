@@ -1,8 +1,9 @@
-import React from 'react'
-import { useState } from 'react';
-
-
-
+import React, { useState } from 'react'
+import { defaultCars } from '../agencyData'
+import CarModal from '../coponements/cars/CarModal'
+import CarStatCard from '../coponements/cars/CarStatCard'
+import CarFilters from '../coponements/cars/CarFilters'
+import CarTable from '../coponements/cars/CarTable'
 
 const buildStats = (cars) => {
   const availableCount = cars.filter((car) => car.status === 'available').length;
@@ -40,62 +41,7 @@ const getPriceValue = (price) => {
 };
 
 const Cars = () => {
-  const [cars, setCars] = useState([
-    {
-      id: 1,
-      name: 'Tesla Model 3',
-      type: 'Electric Sedan',
-      category: 'Sedan',
-      year: '2023',
-      price: '$89',
-      status: 'available',
-    },
-    {
-      id: 2,
-      name: 'BMW X5',
-      type: 'Luxury SUV',
-      category: 'SUV',
-      year: '2024',
-      price: '$129',
-      status: 'rented',
-    },
-    {
-      id: 3,
-      name: 'Porsche 911',
-      type: 'Sports Car',
-      category: 'Sports',
-      year: '2023',
-      price: '$299',
-      status: 'available',
-    },
-    {
-      id: 4,
-      name: 'Mercedes S-Class',
-      type: 'Luxury Sedan',
-      category: 'Luxury',
-      year: '2024',
-      price: '$199',
-      status: 'maintenance',
-    },
-    {
-      id: 5,
-      name: 'Audi A4',
-      type: 'Premium Sedan',
-      category: 'Sedan',
-      year: '2023',
-      price: '$79',
-      status: 'available',
-    },
-    {
-      id: 6,
-      name: 'Range Rover Sport',
-      type: 'Luxury SUV',
-      category: 'SUV',
-      year: '2024',
-      price: '$159',
-      status: 'rented',
-    },
-  ]);
+  const [cars, setCars] = useState(defaultCars)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCarId, setEditingCarId] = useState(null);
   const [formData, setFormData] = useState(defaultFormState);
@@ -230,6 +176,7 @@ const Cars = () => {
 
       return Number(b.year) - Number(a.year);
     });
+
   return (
     <div className="page">
       <div className="page-header">
@@ -242,266 +189,29 @@ const Cars = () => {
         </button>
       </div>
 
-      {isModalOpen && (
-        <div
-          className="modal-backdrop"
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(15, 23, 42, 0.55)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 50,
-          }}
-          role="presentation"
-          onClick={handleCloseModal}
-        >
-          <div
-            className="modal-card"
-            style={{
-              background: '#ffffff',
-              borderRadius: '16px',
-              padding: '24px',
-              width: 'min(520px, 92vw)',
-              boxShadow: '0 20px 45px rgba(15, 23, 42, 0.18)',
-            }}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Add new car"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div>
-                <h2 style={{ margin: 0, fontSize: '1.25rem' }}>
-                  {editingCarId === null ? 'Add New Car' : 'Edit Car'}
-                </h2>
-                <p style={{ margin: '4px 0 0', color: '#64748b', fontSize: '0.95rem' }}>
-                  {editingCarId === null
-                    ? 'Fill the details to add a car to inventory.'
-                    : 'Update the details and save your changes.'}
-                </p>
-              </div>
-              <button
-                type="button"
-                aria-label="Close"
-                onClick={handleCloseModal}
-                style={{
-                  border: 'none',
-                  background: 'transparent',
-                  fontSize: '1.25rem',
-                  cursor: 'pointer',
-                }}
-              >
-                ×
-              </button>
-            </div>
-
-            <form onSubmit={handleAddCar} style={{ marginTop: '20px', display: 'grid', gap: '12px' }}>
-              <div className="filter-group">
-                <label htmlFor="carImage">Car image</label>
-                <input id="carImage" type="file" accept="image/*" onChange={handleImageChange} />
-                <label htmlFor="carName">Car Name</label>
-                <input
-                  id="carName"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="e.g. Tesla Model S"
-                  required
-                />
-              </div>
-              <div className="filter-group">
-                <label htmlFor="carType">Type</label>
-                <input
-                  id="carType"
-                  name="type"
-                  value={formData.type}
-                  onChange={handleChange}
-                  placeholder="e.g. Electric Sedan"
-                  required
-                />
-              </div>
-              <div className="filter-group">
-                <label htmlFor="carCategory">Category</label>
-                <select id="carCategory" name="category" value={formData.category} onChange={handleChange}>
-                  <option>Sedan</option>
-                  <option>SUV</option>
-                  <option>Sports</option>
-                  <option>Luxury</option>
-                </select>
-              </div>
-              <div className="filter-group">
-                <label htmlFor="carYear">Year</label>
-                <input
-                  id="carYear"
-                  name="year"
-                  value={formData.year}
-                  onChange={handleChange}
-                  placeholder="2024"
-                  required
-                />
-              </div>
-              <div className="filter-group">
-                <label htmlFor="carPrice">Price per day</label>
-                <input
-                  id="carPrice"
-                  name="price"
-                  value={formData.price}
-                  onChange={handleChange}
-                  placeholder="89 or $89"
-                  required
-                />
-              </div>
-              <div className="filter-group">
-                <label htmlFor="carStatus">Status</label>
-                <select id="carStatus" name="status" value={formData.status} onChange={handleChange}>
-                  <option value="available">Available</option>
-                  <option value="rented">Rented</option>
-                  <option value="maintenance">Maintenance</option>
-                </select>
-              </div>
-
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '8px' }}>
-                <button type="button" className="page-btn" onClick={handleCloseModal}>
-                  Cancel
-                </button>
-                <button type="submit" className="primary-button">
-                  {editingCarId === null ? 'Save Car' : 'Update Car'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      <CarModal
+        isOpen={isModalOpen}
+        editingCarId={editingCarId}
+        formData={formData}
+        handleChange={handleChange}
+        handleImageChange={handleImageChange}
+        handleAddCar={handleAddCar}
+        handleCloseModal={handleCloseModal}
+      />
 
       <section className="stat-grid">
         {stats.map((stat) => (
-          <div className="stat-card" key={stat.label}>
-            <div className="stat-icon">{stat.icon}</div>
-            <div className="stat-value">{stat.value}</div>
-            <div className="stat-label">{stat.label}</div>
-          </div>
+          <CarStatCard key={stat.label} {...stat} />
         ))}
       </section>
 
-      <section className="filters">
-        <div className="filter-group">
-          <label htmlFor="search">Search</label>
-          <input
-            id="search"
-            name="search"
-            type="search"
-            placeholder="Search by make, model..."
-            value={filters.search}
-            onChange={handleFilterChange}
-          />
-        </div>
-        <div className="filter-group">
-          <label htmlFor="status">Status</label>
-          <select id="status" name="status" value={filters.status} onChange={handleFilterChange}>
-            <option value="all">All Status</option>
-            <option value="available">Available</option>
-            <option value="rented">Rented</option>
-            <option value="maintenance">Maintenance</option>
-          </select>
-        </div>
-        <div className="filter-group">
-          <label htmlFor="category">Category</label>
-          <select id="category" name="category" value={filters.category} onChange={handleFilterChange}>
-            <option value="all">All Categories</option>
-            <option value="Sedan">Sedan</option>
-            <option value="SUV">SUV</option>
-            <option value="Sports">Sports</option>
-            <option value="Luxury">Luxury</option>
-          </select>
-        </div>
-        <div className="filter-group">
-          <label htmlFor="sort">Sort By</label>
-          <select id="sort" name="sort" value={filters.sort} onChange={handleFilterChange}>
-            <option value="newest">Newest First</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-          </select>
-        </div>
-      </section>
+      <CarFilters filters={filters} handleFilterChange={handleFilterChange} />
 
-      <section className="table-card">
-        <div className="table-head">
-          <div>Car</div>
-          <div>Category</div>
-          <div>Year</div>
-          <div>Price/Day</div>
-          <div>Status</div>
-          <div>Actions</div>
-        </div>
-
-        {filteredCars.map((car) => (
-          <div className="table-row" key={car.id}>
-            <div className="car-cell">
-              <div
-                className="car-thumb"
-                style={
-                  car.imageUrl
-                    ? { backgroundImage: `url(${car.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }
-                    : undefined
-                }
-              />
-              <div className="car-meta">
-                <span>{car.name}</span>
-                <small>{car.type}</small>
-              </div>
-            </div>
-            <div>{car.category}</div>
-            <div>{car.year}</div>
-            <div>{car.price}</div>
-            <div>
-              <span
-                className={`status-pill status-${car.status}`}
-              >
-                {car.status.charAt(0).toUpperCase() + car.status.slice(1)}
-              </span>
-            </div>
-            <div className="action-buttons">
-              <button
-                className="action-button"
-                type="button"
-                aria-label="Edit"
-                onClick={() => handleEditCar(car)}
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M4 20h4l10-10a2.5 2.5 0 10-4-4L4 16v4z"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-              <button
-                className="action-button delete"
-                type="button"
-                aria-label="Delete"
-                onClick={() => handleDeleteCar(car.id)}
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M6 7h12M9 7V5h6v2m-7 0l1 12h8l1-12"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        ))}
-
-      </section>
+      <CarTable
+        filteredCars={filteredCars}
+        handleEditCar={handleEditCar}
+        handleDeleteCar={handleDeleteCar}
+      />
     </div>
   )
 }
