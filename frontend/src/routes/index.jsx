@@ -7,6 +7,7 @@ import GatePage from "../pages/gatePage";
 import AdminLayout from "../pages/admin/layout/adminLayout";
 import MainLayout from "@/components/layout/PublicLayout";
 import NoFooterLayout from "@/components/layout/NoFooterLayout";
+import ClientLayout from "@/components/layout/ClientLayout";
 
 // Admin
 import Dashboard from "../pages/admin/adminPages/dashboard";
@@ -32,6 +33,13 @@ import ForgotPassword from "../pages/authentification/ForgotPassword";
 import AgencySignIn from "../pages/authentification/AgencySignIn";
 import AgencyCreateAccount from "../pages/authentification/AgencyCreateAccount";
 import AgencyForgotPassword from "../pages/authentification/AgencyForgotPassword";
+
+// Client
+import ClientDashboard from "../pages/client/Dashboard";
+import ClientReservations from "../pages/client/Reservations";
+import ClientReservationDetails from "../pages/client/ReservationDetails";
+import ClientNotifications from "../pages/client/Notifications";
+import ClientProfile from "../pages/client/Profile";
 
 const router = createBrowserRouter([
   // ================= GATE =================
@@ -113,6 +121,20 @@ const router = createBrowserRouter([
   {
     path: "/agency/forgot-password",
     element: <AgencyForgotPassword />,
+  },
+
+  // ================= CLIENT =================
+  {
+    path: "/client",
+    element: <ClientLayout />,
+    children: [
+      { index: true, element: <ClientDashboard /> },
+      { path: "dashboard", element: <ClientDashboard /> },
+      { path: "reservations", element: <ClientReservations /> },
+      { path: "reservations/:id", element: <ClientReservationDetails /> },
+      { path: "notifications", element: <ClientNotifications /> },
+      { path: "profile", element: <ClientProfile /> },
+    ],
   },
 ]);
 
