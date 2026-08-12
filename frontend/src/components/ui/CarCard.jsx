@@ -4,29 +4,23 @@ import { BsFillFuelPumpFill } from "react-icons/bs";
 import { FaRegSnowflake, FaStar } from "react-icons/fa6";
 import PropTypes from "prop-types";
 
+import vehicleImage from "../../assets/images/vehicle_transparent.png";
+
 import agencyIcon from "../../assets/icons/agency_icon.svg";
 
-export default function CarCard({
-  id,
-  img,
-  title,
-  type,
-  agencyName,
-  agencyLogo,
-  pricePerDay,
-  rating = 5,
-  features,
-}) {
+export default function CarCard({ vehicle }) {
+  const { id, title, type, rating, pricePerDay, features, agency } = vehicle;
+  const agencyName = agency?.name;
+  const agencyLogo = agency?.logo;
   const normalizedRating = Math.max(0, Math.min(5, Number(rating) || 0));
   const filledStars = Math.round(normalizedRating);
 
   return (
-    <div className="flex h-full w-full max-w-101.5 flex-col items-center gap-6 overflow-hidden rounded-[20px] border border-[#ECECEC] bg-[#FAFAFA] p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
-
+    <div className="flex h-auto w-full flex-col items-center gap-6 overflow-hidden rounded-[20px] border border-[#ECECEC] bg-[#FAFAFA] p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
       {/* IMAGE */}
       <img
         className="h-56 w-full shrink-0 rounded-xl bg-white object-contain p-2 md:h-60"
-        src={img || "Car image"}
+        src={vehicleImage}
         alt={title || "Car image"}
       />
 
@@ -43,12 +37,11 @@ export default function CarCard({
 
           {/* STARS + AGENCY */}
           <div className="mt-4 flex items-center gap-8 flex-wrap">
-
             {/* STARS */}
             <div className="flex items-center gap-1.5">
               {Array.from({ length: 5 }).map((_, index) => (
                 <FaStar
-                  key={index+1}
+                  key={index + 1}
                   className={
                     index < filledStars ? "text-[#F4B400]" : "text-gray-300"
                   }
@@ -62,7 +55,7 @@ export default function CarCard({
 
             {/* AGENCY */}
             <NavLink
-              to={`/agencies/${agencyName ?? "unknown"}`}
+              to={`/public/agencies/${agency?.id}`}
               className="flex items-center gap-2 rounded-full border border-[#5937E026] bg-[#5937E014] px-3 py-1 transition hover:bg-[#5937E026]"
             >
               <img
@@ -88,7 +81,6 @@ export default function CarCard({
 
       {/* FEATURES */}
       <div className="flex w-full items-center justify-between gap-4 border-t border-[#ECECEC] pt-5 text-[14px] text-[#00000099]">
-
         <p className="flex flex-1 items-center justify-center gap-2">
           <TbManualGearbox className="text-black" />
           {features?.transmission || "N/A"}
@@ -108,14 +100,14 @@ export default function CarCard({
       {/* BUTTONS */}
       <div className="mt-2 flex w-full flex-col gap-3 sm:flex-row">
         <NavLink
-          to={`/vehicles/${id ?? "invalid"}/reservation`}
+          to={`/public/vehicles/car-details/${id}`}
           className="flex-1 bg-[#5937E0] text-white py-2.5 rounded-lg hover:opacity-90 transition text-center"
         >
           Book Now
         </NavLink>
 
         <NavLink
-          to={`/vehicles/car-details/${id}`}
+          to={`/public/vehicles/car-details/${id}`}
           className="flex-1 border border-gray-300 py-2.5 rounded-lg hover:bg-gray-100 transition text-center"
         >
           View Details
@@ -126,17 +118,22 @@ export default function CarCard({
 }
 
 CarCard.propTypes = {
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  img: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  agencyName: PropTypes.string.isRequired,
-  agencyLogo: PropTypes.string,
-  pricePerDay: PropTypes.number.isRequired,
-  rating: PropTypes.number,
-  features: PropTypes.shape({
-    transmission: PropTypes.string.isRequired,
-    fuel: PropTypes.string.isRequired,
-    ac: PropTypes.bool.isRequired,
+  vehicle: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    img: PropTypes.string,
+    title: PropTypes.string,
+    type: PropTypes.string,
+    pricePerDay: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    features: PropTypes.shape({
+      transmission: PropTypes.string,
+      fuel: PropTypes.string,
+      ac: PropTypes.bool,
+    }),
+    agency: PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      name: PropTypes.string,
+      logo: PropTypes.string,
+    }),
   }).isRequired,
 };

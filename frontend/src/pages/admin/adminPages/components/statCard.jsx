@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function StatCard({ title, value, subtitle, icon, bg, text }) {
   return (
     <div className="bg-white rounded-xl p-5 shadow-sm flex justify-between items-center">
@@ -12,3 +14,12 @@ export default function StatCard({ title, value, subtitle, icon, bg, text }) {
     </div>
   );
 }
+
+StatCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  subtitle: PropTypes.string,
+  icon: PropTypes.node,
+  bg: PropTypes.string,
+  text: PropTypes.string,
+};

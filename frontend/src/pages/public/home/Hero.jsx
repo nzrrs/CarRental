@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import heroBg from "../../../assets/images/hero_section_bg.png";
+import { villes } from "../../../data/data";
 
 const openDatePicker = (e) => {
   e.target.showPicker?.();
@@ -12,38 +13,102 @@ export default function HomeHero() {
   const [formData, setFormData] = useState({
     carType: "",
     pickupLocation: "",
-    returnLocation: "",
     pickupDate: "",
     returnDate: "",
   });
-  const [sameLocation, setSameLocation] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const locationValue = formData.pickupLocation.trim();
+  const normalizedLocation = locationValue.toLowerCase();
+  const locationIsEmpty = !locationValue;
+  const matchingCity = locationIsEmpty
+    ? null
+    : villes.find((ville) => ville.nom.toLowerCase() === normalizedLocation);
+  const isLocationValid = locationIsEmpty || Boolean(matchingCity);
+  const locationQuery = locationIsEmpty ? "" : normalizedLocation;
+  const locationSuggestions = locationQuery
+    ? villes
+        .filter((ville) => ville.nom.toLowerCase().includes(locationQuery))
+        .slice(0, 6)
+    : [];
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!isLocationValid) {
+      setShowSuggestions(true);
+      return;
+    }
+
+    const finalPickupLocation = locationIsEmpty
+      ? ""
+      : (matchingCity?.nom ?? formData.pickupLocation);
+    const finalFormData = { ...formData, pickupLocation: finalPickupLocation };
     // Turn formData into query params and navigate to /vehicles (object -> array(to filter out empty values) -> object -> query params)
     const filteredData = Object.fromEntries(
-      Object.entries(formData).filter(([, value]) => value !== ""),
+      Object.entries(finalFormData).filter(([, value]) => value !== ""),
     );
     const params = new URLSearchParams(filteredData);
-    navigate(`/vehicles?${params.toString()}`, { state: formData });
+    navigate(`/public/vehicles?${params.toString()}`, {
+      state: finalFormData,
+    });
   };
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [id]: value,
-      ...(id === "pickupLocation" && sameLocation && { returnLocation: value }),
-    }));
+    setFormData((prev) => {
+      const next = { ...prev, [id]: value };
+
+      if (id === "pickupDate") {
+        if (!value) {
+          next.returnDate = "";
+        } else if (next.returnDate && next.returnDate < value) {
+          next.returnDate = value;
+        }
+      }
+
+      if (id === "returnDate" && prev.pickupDate && value < prev.pickupDate) {
+        next.returnDate = prev.pickupDate;
+      }
+
+      return next;
+    });
   };
 
-  const handleSameLocation = (e) => {
-    setSameLocation(e.target.checked);
-    if (e.target.checked) {
-      setFormData((prev) => ({
-        ...prev,
-        returnLocation: prev.pickupLocation,
-      }));
+  const handleLocationFocus = () => {
+    setShowSuggestions(true);
+  };
+
+  const handleLocationBlur = () => {
+    globalThis.setTimeout(() => {
+      setShowSuggestions(false);
+    }, 120);
+  };
+
+  const handleLocationSelect = (value) => {
+    setFormData((prev) => ({
+      ...prev,
+      pickupLocation: value,
+    }));
+    setShowSuggestions(false);
+  };
+
+  const handleLocationKeyDown = (e) => {
+    const isEnter = e.key === "Enter";
+    const isTab = e.key === "Tab";
+
+    if (!isEnter && !isTab) return;
+
+    if (showSuggestions && locationSuggestions.length > 0) {
+      if (isEnter) {
+        e.preventDefault();
+      }
+      handleLocationSelect(locationSuggestions[0].nom);
+      return;
+    }
+
+    if (isEnter && !isLocationValid) {
+      e.preventDefault();
+      setShowSuggestions(true);
     }
   };
 
@@ -65,7 +130,7 @@ export default function HomeHero() {
             iste nisi?
           </p>
           <NavLink
-            to="/vehicles"
+            to="/public/vehicles"
             className="inline-flex items-center px-4 py-3 bg-[#FF9E0C] text-white font-medium w-fit text-sm sm:text-base lg:text-lg rounded-lg transition-colors duration-300 hover:bg-[#e68f0a]"
           >
             View All Cars
@@ -89,6 +154,7 @@ export default function HomeHero() {
                 value={formData.carType}
                 onChange={handleChange}
                 className="block w-full rounded-xl bg-[#FAFAFA] py-3 px-3 outline-none appearance-none cursor-pointer placeholder:text-gray-400"
+                required
               >
                 <option value="" disabled>
                   Car type
@@ -131,11 +197,38 @@ export default function HomeHero() {
                 id="pickupLocation"
                 value={formData.pickupLocation}
                 onChange={handleChange}
+                onFocus={handleLocationFocus}
+                onBlur={handleLocationBlur}
+                onKeyDown={handleLocationKeyDown}
+                autoComplete="off"
+                aria-expanded={showSuggestions}
+                aria-controls="home-location-suggestions"
+                aria-invalid={!isLocationValid}
                 className="block w-full rounded-xl bg-[#FAFAFA] py-3 px-3 outline-none text-gray-900 placeholder:text-gray-400"
                 placeholder="Place of rental"
+                required
               />
+              {showSuggestions && locationSuggestions.length > 0 && (
+                <ul
+                  id="home-location-suggestions"
+                  role="listbox"
+                  className="absolute left-0 right-0 top-full z-20 mt-2 max-h-60 overflow-auto rounded-xl border border-gray-200 bg-white py-2 text-sm text-gray-800 shadow-lg"
+                >
+                  {locationSuggestions.map((ville) => (
+                    <li key={ville.id} role="option">
+                      <button
+                        type="button"
+                        onMouseDown={() => handleLocationSelect(ville.nom)}
+                        className="flex w-full items-center px-4 py-2.5 text-left transition-colors hover:bg-gray-50"
+                      >
+                        {ville.nom}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
               <svg
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none text-gray-400"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none text-gray-900"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -144,33 +237,15 @@ export default function HomeHero() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  d="M12 21s7-5.686 7-11a7 7 0 10-14 0c0 5.314 7 11 7 11z"
                 />
-              </svg>
-            </div>
-
-            {/* RETURN LOCATION */}
-            <div className="relative">
-              <input
-                type="text"
-                id="returnLocation"
-                value={formData.returnLocation}
-                onChange={handleChange}
-                disabled={sameLocation}
-                className="block w-full rounded-xl bg-[#FAFAFA] py-3 px-3 outline-none text-gray-900 placeholder:text-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
-                placeholder="Place of return"
-              />
-              <svg
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
+                <circle
+                  cx="12"
+                  cy="10"
+                  r="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
                 />
               </svg>
             </div>
@@ -195,22 +270,15 @@ export default function HomeHero() {
               onClick={openDatePicker}
               onFocus={openDatePicker}
               className="block w-full rounded-xl bg-[#FAFAFA] py-3 px-3 outline-none cursor-pointer text-gray-900"
+              min={formData.pickupDate || undefined}
+              disabled={!formData.pickupDate}
+              required
             />
-
-            {/* SAME LOCATION CHECKBOX */}
-            <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-700 pl-1">
-              <input
-                type="checkbox"
-                checked={sameLocation}
-                onChange={handleSameLocation}
-                className="w-4 h-4 rounded border-gray-300 cursor-pointer"
-              />Same as pickup location
-            </label>
           </div>
 
           <button
             type="submit"
-            className="rounded-lg bg-[#FF9E0C] px-4 py-3 text-white font-semibold transition-colors duration-300 hover:bg-[#e68f0a] focus:outline-none"
+            className="rounded-lg bg-[#FF9E0C] px-4 py-3 text-white font-semibold transition-colors duration-300 hover:bg-[#e68f0a] focus:outline-none flex-1"
           >
             Search
           </button>

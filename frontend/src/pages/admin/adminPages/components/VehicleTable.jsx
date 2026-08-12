@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import PropTypes from "prop-types";
 import { categories } from "../../../../data/data";
 
 function ValidationBadge({ status }) {
@@ -15,6 +16,10 @@ function ValidationBadge({ status }) {
   );
 }
 
+ValidationBadge.propTypes = {
+  status: PropTypes.oneOf(["approved", "pending", "rejected"]).isRequired,
+};
+
 function StatusIndicator({ available }) {
   return (
     <div className="flex items-center gap-2">
@@ -23,6 +28,10 @@ function StatusIndicator({ available }) {
     </div>
   );
 }
+
+StatusIndicator.propTypes = {
+  available: PropTypes.bool.isRequired,
+};
 
 export default function VehicleTable({ vehicles, agencies }) {
   const [page, setPage] = useState(1);
@@ -148,3 +157,30 @@ export default function VehicleTable({ vehicles, agencies }) {
     </div>
   );
 }
+
+VehicleTable.propTypes = {
+  vehicles: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      img: PropTypes.string,
+      specs: PropTypes.shape({
+        brand: PropTypes.string,
+        model: PropTypes.string,
+      }),
+      type: PropTypes.string,
+      pricePerDay: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      availability: PropTypes.shape({
+        isAvailable: PropTypes.bool,
+      }),
+      agency: PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      }),
+    })
+  ).isRequired,
+  agencies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      nom: PropTypes.string,
+    })
+  ).isRequired,
+};

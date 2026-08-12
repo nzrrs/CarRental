@@ -1,5 +1,6 @@
 
 import { useMemo, useState } from "react";
+import PropTypes from "prop-types";
 import { agences as agenciesData, villes } from "../../../data/data";
 
 function StatusBadge({ status }) {
@@ -25,6 +26,10 @@ function StatusBadge({ status }) {
         </span>
     );
 }
+
+StatusBadge.propTypes = {
+  status: PropTypes.oneOf(["pending", "active", "disabled"]).isRequired,
+};
 
 export default function ManageAgencies() {
     const [query, setQuery] = useState("");
